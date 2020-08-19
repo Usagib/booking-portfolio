@@ -8,6 +8,10 @@ RSpec.describe 'Appointment', type: :request do
   let(:appointment_id) { appointments.first.id }
   let(:id) { appointments.first.id }
 
+  example_date = Faker::Date.forward(days: 30)
+  example_time = Faker::Time.forward(days: 5,  period: :evening)
+  example_description = Faker::Quote.matz
+
   describe 'GET /services/:service_id/appointments' do
     before { get "/services/#{services_id}/appointments" }
 
@@ -91,9 +95,11 @@ RSpec.describe 'Appointment', type: :request do
   describe 'POST /services/:service_id/appointments' do
     # valid payload
     let(:valid_attributes) {
-      date: Faker::Date.forward(days: 30),
-      time: Faker::Time.forward(days: 5,  period: :evening),
-      description: Faker::Quote.matz
+      {
+        date: example_date,
+        time: example_time,
+        description: example_description
+      }
     }
 
     context 'when attributes are valid' do
@@ -121,9 +127,11 @@ RSpec.describe 'Appointment', type: :request do
   describe 'POST /users/:user_id/appointments' do
     # valid payload
     let(:valid_attributes) {
-      date: Faker::Date.forward(days: 30),
-      time: Faker::Time.forward(days: 5,  period: :evening),
-      description: Faker::Quote.matz
+      {
+        date: example_date,
+        time: example_time,
+        description: example_description
+      }
     }
 
     context 'when attributes are valid' do
@@ -150,7 +158,9 @@ RSpec.describe 'Appointment', type: :request do
 
   describe 'PUT /services/:service_id/appointments/:id' do
     let(:valid_attributes) {
-      description: "This is the updated description for appointment"
+      {
+            description: "This is the updated description for appointment"
+      }
     }
 
     before { put "/services/#{service_id}/appointments/#{id}", params: valid_attributes }
@@ -181,7 +191,9 @@ RSpec.describe 'Appointment', type: :request do
 
   describe 'PUT /users/:user_id/appointments/:id' do
     let(:valid_attributes) {
-      description: "This is the updated description for appointment"
+      {
+        description: "This is the updated description for appointment"
+      }
     }
 
     before { put "/users/#{user_id}/appointments/#{id}", params: valid_attributes }

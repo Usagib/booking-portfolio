@@ -1,5 +1,5 @@
 class ServicesController < ApplicationController
-  before_action :set_service, only[:show, :update, :destroy]
+  before_action :set_service, only: [:show, :update, :destroy]
 
   def index
     @services = Service.all
