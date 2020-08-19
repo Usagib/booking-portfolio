@@ -2,8 +2,10 @@ require 'rails_helper'
 require 'faker'
 
 RSpec.describe 'Services', type: :request do
-  let!(:services) { create_list(:service, 10) }
+  let(:user) { create(:user) }
+  let!(:services) { create_list(:service, 10, user_id: user.id) }
   let(:service_id) { services.first.id }
+  let(:headers) { valid_headers }
   example_name = Faker::Name.name
   example_description = Faker::Quote.matz
   example_max_cost = Faker::Number.number(digits: 2)
@@ -11,7 +13,11 @@ RSpec.describe 'Services', type: :request do
   example_image_url = 'https://via.placeholder.com/50'
 
   describe 'GET /services' do
-    before { get '/services' }
+    before {
+      get '/services',
+      params: {},
+      headers: headers
+    }
 
     it 'gets services' do
       expect(json).not_to be_empty
@@ -24,7 +30,11 @@ RSpec.describe 'Services', type: :request do
   end
 
   describe 'GET /services/:id' do
-    before { get "/services/#{service_id}" }
+    before {
+      get "/services/#{service_id}",
+      params: {},
+      headers: headers
+    }
 
     context 'when the record exists' do
       it 'returns the service' do
@@ -58,11 +68,11 @@ RSpec.describe 'Services', type: :request do
         max_cost: example_max_cost,
         min_cost: example_min_cost,
         image_url: example_image_url
-      }
+      }.to_json
     }
 
     context 'when the request is valid' do
-      before { post '/services', params: valid_attributes }
+      before { post '/services', params: valid_attributes, headers: headers }
 
       it 'creates a service' do
         expect(json['name']).to eq(example_name)
@@ -74,7 +84,8 @@ RSpec.describe 'Services', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/services', params: { name: '' } }
+      let(:no_attributes) { { name: '' }.to_json }
+      before { post '/services', params: no_attributes, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -88,10 +99,10 @@ RSpec.describe 'Services', type: :request do
   end
 
   describe 'PUT /services/:id' do
-    let(:valid_attributes) { { name: 'Updated name' } }
+    let(:valid_attributes) { { name: 'Updated name' }.to_json }
 
     context 'when the record exists' do
-      before { put "/services/#{service_id}", params: valid_attributes }
+      before { put "/services/#{service_id}", params: valid_attributes, headers: headers }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -104,7 +115,7 @@ RSpec.describe 'Services', type: :request do
   end
 
   describe 'DELETE /services/:id' do
-    before { delete "/services/#{service_id}" }
+    before { delete "/services/#{service_id}", params: {}, headers:  headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

@@ -2,17 +2,23 @@ require 'rails_helper'
 require 'faker'
 
 RSpec.describe 'Appointment', type: :request do
+  let(:user) { create(:user) }
   let!(:service) { create(:service) }
   let!(:appointments) { create_list(:appointment, 10, service_id: service.id) }
   let(:service_id) { service.id }
   let(:id) { appointments.first.id }
+  let(:headers) { valid_headers }
 
   example_date = Faker::Date.forward(days: 30)
   example_time = Faker::Time.forward(days: 5,  period: :evening)
   example_description = 'this is a description of the'
 
   describe 'GET /services/:service_id/appointments' do
-    before { get "/services/#{service_id}/appointments" }
+    before {
+      get "/services/#{service_id}/appointments",
+      params: {},
+      headers: headers
+     }
 
     it 'gets appointment from services' do
       expect(json).not_to be_empty
@@ -25,7 +31,10 @@ RSpec.describe 'Appointment', type: :request do
   end
 
   describe 'GET /services/:service_id/appointments/:id' do
-      before { get "/services/#{service_id}/appointments/#{id}" }
+      before {
+        get "/services/#{service_id}/appointments/#{id}",
+        params: {},
+        headers: headers }
 
     context 'it exists' do
       it 'returns the appointment' do
@@ -52,17 +61,16 @@ RSpec.describe 'Appointment', type: :request do
   end
 
   describe 'POST /services/:service_id/appointments' do
-    # valid payload
     let(:valid_attributes) {
       {
         date: example_date,
         time: example_time,
         description: example_description
-      }
+      }.to_json
     }
 
     context 'when attributes are valid' do
-      before { post "/services/#{service_id}/appointments", params: valid_attributes }
+      before { post "/services/#{service_id}/appointments", params: valid_attributes, headers: headers }
 
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
@@ -70,7 +78,8 @@ RSpec.describe 'Appointment', type: :request do
     end
 
     context 'when attributes are invalid' do
-      before { post "/services/#{service_id}/appointments", params: { description: 'invalid' } }
+      let(:invalid_description) { { description: ''}.to_json }
+      before { post "/services/#{service_id}/appointments", params: invalid_description, headers: headers }
 
       it 'http status 422' do
         expect(response).to have_http_status(422)
@@ -87,10 +96,10 @@ RSpec.describe 'Appointment', type: :request do
     let(:valid_attributes) {
       {
             description: "This is the updated description for appointment"
-      }
+      }.to_json
     }
 
-    before { put "/services/#{service_id}/appointments/#{id}", params: valid_attributes }
+    before { put "/services/#{service_id}/appointments/#{id}", params: valid_attributes, headers: headers }
 
     context 'when the record exists' do
       it 'updates the record' do
@@ -117,7 +126,7 @@ RSpec.describe 'Appointment', type: :request do
   end
 
   describe 'DELETE /appointments/:id' do
-    before { delete "/services/#{service_id}/appointments/#{id}" }
+    before { delete "/services/#{service_id}/appointments/#{id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

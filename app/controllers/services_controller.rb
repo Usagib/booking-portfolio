@@ -2,7 +2,7 @@ class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :update, :destroy]
 
   def index
-    @services = Service.all
+    @services = current_user.services
     json_response(@services)
   end
 
@@ -11,7 +11,7 @@ class ServicesController < ApplicationController
   end
 
   def create
-    @service = Service.create!(service_params)
+    @service = current_user.services.create!(service_params)
     json_response(@service, :created)
   end
 
@@ -33,4 +33,5 @@ class ServicesController < ApplicationController
   def set_service
     @service = Service.find(params[:id])
   end
+
 end
