@@ -1,25 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-class ServiceSelect extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      servicesList: [
-        '3d Printing',
-        'Web Development',
-        'Web Design',
-        'Illustration',
-        'Graphic Design',
-        'Project Management',
-        'Stationery Production',
-        'Tech Support',
-      ],
-    };
-  }
+const ServiceSelect = props => {
 
-  render() {
-    return (
-      <div className="login-container">
+  const servicesList = [
+    '3d Printing',
+    'Web Development',
+    'Web Design',
+    'Illustration',
+    'Graphic Design',
+    'Project Management',
+    'Stationery Production',
+    'Tech Support',
+  ];
+
+  return (
+    <div className="login-container">
         <div class="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
           <h1 class="display-4">Services.</h1>
           <form>
@@ -29,7 +24,7 @@ class ServiceSelect extends React.Component {
                   className="form-control"
                   id="selectService"
                 >
-                  {this.state.servicesList.map(services => (
+                  {servicesList.map(services => (
                     <option key={services}>
                       {services}
                     </option>
@@ -51,8 +46,7 @@ class ServiceSelect extends React.Component {
           </form>
         </div>
       </div>
-    );
-  }
+  );
 }
 
 export default ServiceSelect

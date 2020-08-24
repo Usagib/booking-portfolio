@@ -5,7 +5,7 @@ class Navigation extends React.Component {
     super(props);
     this.toggleSidenav = this.toggleSidenav.bind(this);
     this.state = {
-      toggleSidebar: "",
+      toggleSidebar: "hidden",
     };
   }
 
@@ -94,6 +94,12 @@ class Navigation extends React.Component {
               <a href="/profile" className="nav-link text-dark font-italic">
                 <i className="fa fa-address-card mr-3 text-primary fa-fw"></i>
                 Profile
+              </a>
+            </li>
+            <li className="nav-item">
+              <a href="/loginhelper" className="nav-link text-dark font-italic">
+                <i className="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                login helper
               </a>
             </li>
           </ul>

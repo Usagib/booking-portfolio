@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import DatePicker from './components/DatePicker';
 import Profile from './components/Profile';
+import LoginHelper from './helpers/LoginHelper';
 
 import {
   BrowserRouter as Router,
@@ -50,6 +51,9 @@ function App() {
           </Route>
           <Route path="/profile">
             <Profile />
+          </Route>
+          <Route path="/loginhelper">
+            <LoginHelper />
           </Route>
           <Route path="/">
             <Home />
