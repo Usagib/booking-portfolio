@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import LoginHelper from '../helpers/LoginHelper';
+
 
 const Login = () => (
   <div className="login-container">

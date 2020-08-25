@@ -5,9 +5,11 @@ class LoginHelper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: '',
       user: 'test1@test.com',
       password: 'password',
       authToken: '',
+      company: '',
     };
     this.logUser = this.logUser.bind(this);
   }
@@ -15,24 +17,21 @@ class LoginHelper extends React.Component {
   logUser() {
     const qs = require('qs');
     const { user, password } = this.state;
-    console.log(user);
-    console.log(password);
-    let authOption = {
-      mode: 'cors',
-      method: 'POST',
-      url: 'http://localhost:3001/auth/login/',
-      data: {
+
+    axios.post('api/auth/login', qs.stringify(
+      {
         email: user,
         password: password,
-      },
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:3001/auth/login/'
-      },
-      json: true,
-    };
-
-    axios(authOption).then(response => {
-        console.log(response);
+      }
+    )).then(response => {
+       this.setState({
+         user: response.data.user.email,
+         name: response.data.user.name,
+         authToken: response.data.auth_token,
+         company: response.data.user.company,
+         password: '',
+       })
+       console.log(this.state);
       })
       .catch(error => {console.log(error)});
   }

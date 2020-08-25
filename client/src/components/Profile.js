@@ -3,13 +3,6 @@ import axios from 'axios';
 
 const Profile = props => {
 
-  useEffect(() => {
-    axios.get('/api/user.json')
-      .then(res => setUser(res.data))
-  }, []);
-
-  const [user, setUser] = useState([]);
-
   return(
     <div className="login-container">
       <div class="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
