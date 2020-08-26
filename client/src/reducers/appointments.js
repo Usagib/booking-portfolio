@@ -10,11 +10,11 @@ const initialState = [
   }
 ];
 
-const appointmentsReducer = (state = initialState, action) => {
+const appointmentReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_APPOINTMENT:
       return [...state, action.appointment];
-    case REMOVE_BOOK:
+    case REMOVE_APPOINTMENT:
       return state.filter(appointment => appointment.date !== action.appointment.date );
     default:
       return state;

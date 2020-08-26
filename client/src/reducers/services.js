@@ -12,11 +12,11 @@ const initialState = [
   }
 ];
 
-const servicesReducer = (state = initialState, action) => {
+const serviceReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_SERVICE:
       return [...state, action.service];
-    case REMOVE_BOOK:
+    case REMOVE_SERVICE:
       return state.filter(service => service.name !== action.service.name );
     default:
       return state;

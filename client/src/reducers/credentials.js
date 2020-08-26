@@ -4,10 +4,10 @@ const DESTROY_CREDENTIALS = 'DESTROY_CREDENTIALS';
 const initialState = {
     name: '',
     email: '',
-    password: '',
     authToken: '',
     company: '',
-  };
+    id: '',
+};
 
 const credentialsReducer = (state = initialState, action) => {
   switch (action.type) {
