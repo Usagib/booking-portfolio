@@ -97,9 +97,9 @@ class Navigation extends React.Component {
               </a>
             </li>
             <li className="nav-item">
-              <a href="/loginhelper" className="nav-link text-dark font-italic">
+              <a href="/logout" className="nav-link text-dark font-italic">
                 <i className="fa fa-address-card mr-3 text-primary fa-fw"></i>
-                login helper
+                logout
               </a>
             </li>
           </ul>

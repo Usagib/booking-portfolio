@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { logCredentials } from '../actions/index';
+import { login } from '../actions/index';
 
 
 class Signup extends React.Component {
@@ -76,7 +76,7 @@ class Signup extends React.Component {
          name: response.data.user.name,
          company: response.data.user.company,
        })*/
-       logCredentials(this.state);
+       login(this.state);
        console.log(response);
        console.log(this.state);
 
@@ -167,10 +167,12 @@ const mapStateToProps = state => ({
   credentials: state.data,
 });
 
-const mapDispatchToProps = dispatch => ({
-  logCredentials: credential => {
-    dispatch(logCredentials(credential));
-  },
-});
+const mapDispatchToProps = dispatch => {
+  return {
+    login: (credential) => {
+      dispatch(login(credential))
+    }
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

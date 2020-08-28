@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { logCredentials } from '../actions/index';
+import { login } from '../actions/index';
+import { useCookies } from 'react-cookie';
+import { Redirect } from 'react-router-dom';
 
 
 class Login extends React.Component {
@@ -10,9 +12,15 @@ class Login extends React.Component {
     this.state = {
       userEmail: '',
       userPassword: '',
+      authToken: '',
+      name: '',
+      company: '',
+      id: '',
+      email: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.renderRedirect = this.renderRedirect.bind(this);
   }
 
   handleChange(event) {
@@ -35,9 +43,10 @@ class Login extends React.Component {
   }
 
   handleLogin(event) {
+    event.preventDefault();
     const qs = require('qs');
     const { userEmail, userPassword } = this.state;
-    event.preventDefault();
+    const { loginSubmit, cookies } = this.props;
 
     axios.post('api/auth/login', qs.stringify(
       {
@@ -50,20 +59,31 @@ class Login extends React.Component {
          authToken: response.data.auth_token,
          name: response.data.user.name,
          company: response.data.user.company,
-       })
-       logCredentials(this.state);
-       console.log(response);
+         id: response.data.user.id,
+         email: response.data.user.email,
+       });
        console.log(this.state);
-
-      })
+       loginSubmit(this.state);
+     }).then(()=>{
+       const { authToken, id } = this.state
+       cookies.set('id', id, { path: '/' });
+       cookies.set('authToken', authToken, { path: '/' });
+     })
       .catch(error => {console.log(error)});
+  }
 
+  renderRedirect() {
+    const { cookies } = this.props;
+    if (cookies.get('authToken') !== 'null') {
+      return <Redirect to='/profile' />
+    }
   }
 
   render(){
     const { userEmail, userPassword } = this.state;
     return (
       <div className="login-container">
+        {this.renderRedirect()}
         <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
           <h1 className="display-4">Hello.</h1>
           <form>
@@ -94,6 +114,13 @@ class Login extends React.Component {
                     >
                       Log In
                     </button>
+                    <button
+                      className="btn btn-dark btn-lg btn-block"
+                      type="submit"
+                      onClick={this.setRedux}
+                      >
+                        set redux
+                      </button>
                     <small className="form-text text-black">Not yet registered?, <a href="/signup">click here</a></small>
               </div>
           </form>
@@ -102,14 +129,14 @@ class Login extends React.Component {
     )
   }
 }
-
-const mapStateToProps = state => ({
-  credentials: state.data,
+const mapStateToProps = (state, ownProps) => ({
+    credentials: state.authentication,
+    cookies: ownProps.cookies,
 });
 
 const mapDispatchToProps = dispatch => ({
-  logCredentials: credential => {
-    dispatch(logCredentials(credential));
+  loginSubmit: credential => {
+    dispatch(login(credential));
   },
 });
 

@@ -9,10 +9,10 @@ class Profile extends React.Component {
   }
 
   setUser(event) {
-    const { user, authToken } = this.props
+    const { credentials } = this.props
     event.preventDefault();
-    console.log(user);
-    console.log(authToken);
+    console.log(credentials);
+    console.log(this.props);
   }
 
   render() {
@@ -22,7 +22,7 @@ class Profile extends React.Component {
           <h1 class="display-4">Good to see you.</h1>
           <h1 class="display-5">Your email: email@email.com</h1>
           <div>
-            
+
           </div>
           <div id="accordion" className="text-center">
             <div class="card">
@@ -77,8 +77,7 @@ class Profile extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  user: state.user,
-  authToken: state.authToken,
+  credentials: state.authentication,
 });
 
 export default connect(mapStateToProps, null)(Profile);
