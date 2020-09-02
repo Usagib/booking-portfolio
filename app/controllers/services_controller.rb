@@ -2,7 +2,7 @@ class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :update, :destroy]
 
   def index
-    @services = current_user.services
+    @services = @current_user.services
     json_response(@services)
   end
 

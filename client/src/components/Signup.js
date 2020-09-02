@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../actions/index';
 
@@ -11,11 +12,14 @@ class Signup extends React.Component {
       userEmail: '',
       userPassword: '',
       userPasswordConfirmation: '',
-      userName: '',
-      userCompany: '',
+      name: '',
+      company: '',
+      id: '',
+      email: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.renderRedirect = this.renderRedirect.bind(this);
   }
 
   handleChange(event) {
@@ -23,7 +27,7 @@ class Signup extends React.Component {
     switch(event.target.id) {
       case 'userName':
         this.setState({
-          userName: event.target.value,
+          name: event.target.value,
         });
         break;
       case 'userEmail':
@@ -43,7 +47,7 @@ class Signup extends React.Component {
         break;
       case 'userCompany':
         this.setState({
-          userCompany: event.target.value,
+          company: event.target.value,
         });
         break;
       default:
@@ -54,35 +58,47 @@ class Signup extends React.Component {
 
   handleLogin(event) {
     const qs = require('qs');
-    const { userName,
-      userEmail,
-      userPassword,
-      userPasswordConfirmation,
-      userCompany } = this.state;
+    const { name, userEmail, userPassword, userPasswordConfirmation, company } = this.state;
+    const { loginSubmit, cookies } = this.props;
     event.preventDefault();
 
     axios.post('api/signup', qs.stringify(
       {
-        name: userName,
+        name: name,
         email: userEmail,
         password: userPassword,
         password_confirmation: userPasswordConfirmation,
-        company: userCompany,
+        company: company,
       }
     )).then(response => {
-       /*this.setState({
-         userPassword: '',
-         authToken: response.data.auth_token,
-         name: response.data.user.name,
-         company: response.data.user.company,
-       })*/
-       login(this.state);
-       console.log(response);
-       console.log(this.state);
-
-      })
+      this.setState({
+        userPassword: '',
+        userPasswordConfirmation: '',
+        authToken: response.data.auth_token,
+        name: response.data.user.name,
+        company: response.data.user.company,
+        id: response.data.user.id,
+        email: response.data.user.email,
+      });
+      loginSubmit(this.state);
+     }).then(() =>{
+       const { authToken, id, email, name, company } = this.state;
+       cookies.set('id', id, { path: '/' });
+       cookies.set('authToken', authToken, { path: '/' });
+       cookies.set('email', email, { path: '/' });
+       cookies.set('name', name, { path: '/' });
+       cookies.set('company', company, { path: '/'});
+     }).then(()=>{
+       window.location.reload(false);
+     })
       .catch(error => {console.log(error)});
+  }
 
+  renderRedirect() {
+    const { cookies } = this.props;
+    if (cookies.get('authToken') !== 'null') {
+      return <Redirect to='/profile' />
+    }
   }
 
   render(){
@@ -93,6 +109,7 @@ class Signup extends React.Component {
       userCompany } = this.state;
     return (
       <div className="login-container">
+        {this.renderRedirect()}
         <div class="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black" id="header">
           <h1 class="display-4">Thank you.</h1>
           <form>
@@ -163,13 +180,14 @@ class Signup extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   credentials: state.data,
+  cookies: ownProps.cookies,
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: (credential) => {
+    loginSubmit: credential => {
       dispatch(login(credential))
     }
   }

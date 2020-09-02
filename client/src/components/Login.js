@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { login } from '../actions/index';
-import { useCookies } from 'react-cookie';
 import { Redirect } from 'react-router-dom';
 
 
@@ -65,9 +64,14 @@ class Login extends React.Component {
        console.log(this.state);
        loginSubmit(this.state);
      }).then(()=>{
-       const { authToken, id } = this.state
+       const { authToken, id, email, name, company } = this.state;
        cookies.set('id', id, { path: '/' });
        cookies.set('authToken', authToken, { path: '/' });
+       cookies.set('email', email, { path: '/' });
+       cookies.set('name', name, { path: '/' });
+       cookies.set('company', company, { path: '/'});
+     }).then(() =>{
+        window.location.reload(false);
      })
       .catch(error => {console.log(error)});
   }
@@ -114,13 +118,6 @@ class Login extends React.Component {
                     >
                       Log In
                     </button>
-                    <button
-                      className="btn btn-dark btn-lg btn-block"
-                      type="submit"
-                      onClick={this.setRedux}
-                      >
-                        set redux
-                      </button>
                     <small className="form-text text-black">Not yet registered?, <a href="/signup">click here</a></small>
               </div>
           </form>

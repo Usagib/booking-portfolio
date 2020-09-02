@@ -26,7 +26,7 @@ class App extends React.Component {
           <Navigation cookies={this.props.cookies} />
           <Switch>
             <Route path="/services">
-              <Services />
+              <Services cookies={this.props.cookies} />
             </Route>
             <Route path="/serviceselect">
               <ServiceSelect cookies={this.props.cookies} />

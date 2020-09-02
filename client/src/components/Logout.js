@@ -6,6 +6,7 @@ class Logout extends React.Component {
   constructor(props) {
     super(props);
     this.renderRedirect = this.renderRedirect.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   renderRedirect() {
@@ -14,17 +15,39 @@ class Logout extends React.Component {
       return <Redirect to='/login' />
     }
     else {
-      cookies.set('id', null, { path: '/'});
-      cookies.set('authToken', null, { path: '/'});
-      console.log(cookies.get('authToken'));
-      return <Redirect to='/' />
     }
+  }
+
+  handleLogout(event) {
+    event.preventDefault();
+    const { cookies } = this.props;
+    cookies.set('id', null, { path: '/'});
+    cookies.set('authToken', null, { path: '/'});
+    cookies.set('email', null, { path: '/' });
+    cookies.set('name', null, { path: '/' });
+    cookies.set('company', null, { path: '/'});
+    cookies.set('lastService', null, { path:'/' });
+    window.location.reload(false);
   }
 
   render() {
     return (
-      <div>
+      <div className="login-container">
         {this.renderRedirect()}
+        <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
+          <h1 className="display-4">See you later.</h1>
+          <form>
+            <div className="form-group">
+              <button
+                className="btn btn-danger btn-lg btn-block"
+                type="submit"
+                onClick={this.handleLogout}
+              >
+                Log out
+              </button>
+              </div>
+          </form>
+        </div>
       </div>
     )
   }

@@ -3,7 +3,7 @@ class AppointmentsController < ApplicationController
   before_action :set_service_appointment, only: [:show, :update, :destroy]
 
   def index
-    @appointments = Appointment.all
+    @appointments = @service.appointments
     json_response(@appointments)
   end
 

@@ -1,21 +1,33 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
+import UserNavigation from './UserNavigation';
 
 class Navigation extends React.Component {
   constructor(props) {
     super(props);
     this.toggleSidenav = this.toggleSidenav.bind(this);
+    this.refreshNav = this.refreshNav.bind(this);
     this.state = {
-      toggleSidebar: "hidden",
+      toggleSidebar: '',
     };
   }
 
   toggleSidenav() {
       let css = (this.state.toggleSidebar === "active") ? "" : "active";
       this.setState({"toggleSidebar":css});
-      console.log(this.state);
+  }
+
+  refreshNav() {
+    const { cookies } = this.props;
+    if (cookies.get('id') === 'null') {
+      window.location.reload(false);
+      cookies.set('id', 0, { path: '/' })
+    }
   }
 
   render() {
+    const { cookies } = this.props;
+    const logged = cookies.get('authToken') === 'null' ? false : true;
     return (
       <div>
         <button
@@ -32,7 +44,7 @@ class Navigation extends React.Component {
          >
          <img src="navphoto.png" alt="..." width="80" className="mr-3 rounded-circle img-thumbnail shadow-sm" />
          </button>
-        <div className={`vertical-nav bg-white ${this.state.toggleSidebar}`} id="sidebar">
+        <div className={`vertical-nav bg-white toggleSidebar ${this.state.toggleSidebar}`} id="sidebar">
           <div className="py-4 px-3 mb-4 bg-light">
             <div className="media d-flex align-items-center">
               <button
@@ -51,7 +63,7 @@ class Navigation extends React.Component {
               </div>
             </div>
           </div>
-          <p className="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Main</p>
+          <p className="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Me</p>
 
           <ul className="nav flex-column bg-white mb-0">
             <li className="nav-item">
@@ -66,47 +78,18 @@ class Navigation extends React.Component {
                         Services
                     </a>
             </li>
-            <li className="nav-item">
-              <a href="/serviceselect" className="nav-link text-dark font-italic">
-                        <i className="fa fa-cubes mr-3 text-primary fa-fw"></i>
-                        Services Select
-                    </a>
-            </li>
-            <li className="nav-item">
-              <a href="/login" className="nav-link text-dark font-italic">
-                        <i className="fa fa-cubes mr-3 text-primary fa-fw"></i>
-                        Login
-                    </a>
-            </li>
-            <li className="nav-item">
-              <a href="/signup" className="nav-link text-dark font-italic">
-                <i className="fa fa-cubes mr-3 text-primary fa-fw"></i>
-                Signup
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="/datepick" className="nav-link text-dark font-italic">
-                <i className="fa fa-cubes mr-3 text-primary fa-fw"></i>
-                Date Picker
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="/profile" className="nav-link text-dark font-italic">
-                <i className="fa fa-address-card mr-3 text-primary fa-fw"></i>
-                Profile
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="/logout" className="nav-link text-dark font-italic">
-                <i className="fa fa-address-card mr-3 text-primary fa-fw"></i>
-                logout
-              </a>
-            </li>
           </ul>
+
+          <p className="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">You</p>
+          <UserNavigation loggedIn={logged} />
         </div>
       </div>
     );
   }
 }
 
-export default Navigation;
+const mapStateToProps = (state, ownProps) => ({
+  cookies: ownProps.cookies,
+});
+
+export default connect(mapStateToProps, null)(Navigation);
