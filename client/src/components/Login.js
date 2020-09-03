@@ -47,12 +47,16 @@ class Login extends React.Component {
     const { userEmail, userPassword } = this.state;
     const { loginSubmit, cookies } = this.props;
 
-    axios.post('api/auth/login', qs.stringify(
+    axios.post('api/auth/login/',
       {
         email: userEmail,
         password: userPassword,
       },
-    )).then(response => {
+      {
+        'Access-Control-Allow-Origin': 'https://usagi-booking-api.herokuapp.com/api/auth/login',
+      }
+    ).then(response => {
+      console.log(response);
       this.setState({
         userPassword: '',
         authToken: response.data.auth_token,
@@ -60,7 +64,7 @@ class Login extends React.Component {
         company: response.data.user.company,
         id: response.data.user.id,
         email: response.data.user.email,
-      });
+      }).catch((err) => {console.log(err);});
       loginSubmit(this.state);
     }).then(() => {
       const {
