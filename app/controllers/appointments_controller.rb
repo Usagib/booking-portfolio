@@ -1,6 +1,6 @@
 class AppointmentsController < ApplicationController
   before_action :set_service
-  before_action :set_service_appointment, only: [:show, :update, :destroy]
+  before_action :set_service_appointment, only: %i[show update destroy]
 
   def index
     @appointments = @service.appointments
@@ -27,6 +27,7 @@ class AppointmentsController < ApplicationController
   end
 
   private
+
   def appointment_params
     params.permit(:date, :time, :description)
   end

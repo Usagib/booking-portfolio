@@ -1,55 +1,50 @@
-import React from 'react'
+import React from 'react';
 
 const Home = () => (
   <header>
     <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
-    {/*<ol className="carousel-indicators">
-      <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-    </ol> */}
-    <div className="carousel-inner">
-      <div
-        className="carousel-item active"
-        style={{
-          background: `url('railsmain.png')`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}>
-        <div className="carousel-caption d-none d-md-block">
-          <h2 className="display-4"></h2>
-          <p className="lead"></p>
+      <div className="carousel-inner">
+        <div
+          className="carousel-item active"
+          style={{
+            background: 'url(\'railsmain.png\')',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="carousel-caption d-none d-md-block">
+            <h2 className="display-5 text-dark float-right ml-5">I like to develop</h2>
+          </div>
         </div>
-      </div>
-      <div
-        className="carousel-item"
-        style={{
-          background: `url('reactmain.png')`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}>
-        <div className="carousel-caption d-none d-md-block">
-          <h2 className="display-4"></h2>
-          <p className="lead"></p>
+        <div
+          className="carousel-item"
+          style={{
+            background: 'url(\'reactmain.png\')',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="carousel-caption d-none d-md-block">
+            <h2 className="display-5 text-dark float-right ml-5">I like to design</h2>
+          </div>
         </div>
-      </div>
-      <div
-        className="carousel-item"
-        style={{
-          background: `url('designmain.png')`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}>
-        <div className="carousel-caption d-none d-md-block">
-          <h2 className="display-4"></h2>
-          <p className="lead"></p>
+        <div
+          className="carousel-item"
+          style={{
+            background: 'url(\'designmain.png\')',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="carousel-caption d-none d-md-block">
+            <h2 className="display-5 text-dark float-right ml-5">I like to create</h2>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </header>
 
 );

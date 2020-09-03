@@ -5,8 +5,7 @@ const defaultState = {};
 const authReducer = (state = defaultState, action) => {
   switch (action.type) {
     case LOGIN:
-     state = action.credential;
-     return state;
+      return action.credential;
     default:
       return state;
   }

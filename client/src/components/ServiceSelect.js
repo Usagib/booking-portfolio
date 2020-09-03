@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import qs from 'qs';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -11,7 +13,6 @@ class ServiceSelect extends React.Component {
       description: '',
       maxCost: '',
       minCost: '',
-      imageUrl: '',
       background: '',
     };
     this.handleChange = this.handleChange.bind(this);
@@ -21,13 +22,11 @@ class ServiceSelect extends React.Component {
 
   handleChange(event) {
     event.preventDefault();
-    console.log(this.state);
-    switch(event.target.id) {
+    switch (event.target.id) {
       case 'serviceName':
         this.setState({
           name: event.target.value,
         });
-        console.log(event.target.value);
         switch (event.target.value) {
           case '3d Printing':
             this.setState({
@@ -60,12 +59,12 @@ class ServiceSelect extends React.Component {
             });
             break;
           case 'Tech Support':
-          this.setState({
-            background: '/support.png',
-          });
-          break;
+            this.setState({
+              background: '/support.png',
+            });
+            break;
           default:
-          break;
+            break;
         }
         break;
       case 'Notes':
@@ -90,11 +89,11 @@ class ServiceSelect extends React.Component {
   }
 
   createService(event) {
-    const qs = require('qs');
-    const { name, description, maxCost, minCost } = this.state;
+    const {
+      name, description, maxCost, minCost,
+    } = this.state;
     const { cookies } = this.props;
     const authToken = cookies.get('authToken');
-    console.log(authToken);
     const headers = {
       Authorization: authToken,
     };
@@ -102,27 +101,28 @@ class ServiceSelect extends React.Component {
 
     axios.post('api/services/', qs.stringify(
       {
-        name: name,
-        description: description,
+        name,
+        description,
         max_cost: maxCost,
         min_cost: minCost,
-      }
+      },
     ),
-      {
-        headers: headers
-      }).then(response => {
-      cookies.set('lastService', response.data.id, {path: '/'});
+    {
+      headers,
+    }).then(response => {
+      cookies.set('lastService', response.data.id, { path: '/' });
       window.location.reload(false);
-     }).catch(error => {console.log(error)});
+    });
   }
 
   renderRedirect() {
     const { cookies } = this.props;
     if (cookies.get('authToken') === 'null') {
-      return <Redirect to='/login' />
-    } else if (cookies.get('lastService') !== 'null') {
-      return <Redirect to='/datepick' />
+      return <Redirect to="/login" />;
+    } if (cookies.get('lastService') !== 'null') {
+      return <Redirect to="/datepick" />;
     }
+    return true;
   }
 
   render() {
@@ -137,69 +137,81 @@ class ServiceSelect extends React.Component {
     ];
     const { background } = this.state;
     return (
-      <div className="login-container"
+      <div
+        className="login-container"
         style={{
           backgroundImage: `url(${background})`,
           backgroundSize: 'cover',
-        }}>
+        }}
+      >
         {this.renderRedirect()}
-          <div class="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
-            <div>
-            </div>
-            <h1 class="display-4">Select a service</h1>
-            <form className="bg-white mx-5 my-5 px-5 py-5 rounded">
-                <div class="form-group">
-                  <select
-                    className="form-control"
-                    id="serviceName"
-                    onChange={this.handleChange}
+        <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
+          <div />
+          <h1 className="display-4">Select a service</h1>
+          <form className="bg-white mx-5 my-5 px-5 py-5 rounded">
+            <div className="form-group">
+              <select
+                className="form-control"
+                id="serviceName"
+                onChange={this.handleChange}
+              >
+                {servicesList.map(service => (
+                  <option
+                    key={service}
+                    value={`${service}`}
                   >
-                    {servicesList.map(service => (
-                      <option
-                        key={service}
-                        value={`${service}`}>
-                        {service}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="form-group row">
-                  <input
-                    id="Min"
-                    className="col-md-6 form-control"
-                    placeholder="Min budget"
-                    type="number"
-                    onChange={this.handleChange}/>
-                  <input
-                    id="Max"
-                    class="col-md-6 form-control"
-                    placeholder="Max budget"
-                    type="number"
-                    onChange={this.handleChange}/>
-                </div>
-                <div class="form-group">
-                    <input
-                      id="Notes"
-                      class="form-control form-control-lg"
-                      placeholder="Notes"
-                      type="text"
-                      onChange={this.handleChange}/>
-                </div>
-                <div class="form-group">
-                    <button
-                      class="btn btn-dark btn-lg btn-block"
-                      type="submit"
-                      onClick={this.createService}
-                    >
-                      Select service
-                    </button>
-                </div>
-            </form>
-          </div>
+                    {service}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="form-group row">
+              <input
+                id="Min"
+                className="col-md-6 form-control"
+                placeholder="Min budget"
+                type="number"
+                onChange={this.handleChange}
+              />
+              <input
+                id="Max"
+                className="col-md-6 form-control"
+                placeholder="Max budget"
+                type="number"
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                id="Notes"
+                className="form-control form-control-lg"
+                placeholder="Notes"
+                type="text"
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <button
+                className="btn btn-dark btn-lg btn-block"
+                type="submit"
+                onClick={this.createService}
+              >
+                Select service
+              </button>
+            </div>
+          </form>
         </div>
+      </div>
     );
   }
 }
+
+ServiceSelect.propTypes = {
+  cookies: PropTypes.shape({
+    set: PropTypes.func.isRequired,
+    get: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 const mapStateToProps = (state, ownProps) => ({
   cookies: ownProps.cookies,

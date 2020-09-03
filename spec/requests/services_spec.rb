@@ -13,11 +13,11 @@ RSpec.describe 'Services', type: :request do
   example_image_url = 'https://via.placeholder.com/50'
 
   describe 'GET /services' do
-    before {
+    before do
       get '/services',
-      params: {},
-      headers: headers
-    }
+          params: {},
+          headers: headers
+    end
 
     it 'gets services' do
       expect(json).not_to be_empty
@@ -30,11 +30,11 @@ RSpec.describe 'Services', type: :request do
   end
 
   describe 'GET /services/:id' do
-    before {
+    before do
       get "/services/#{service_id}",
-      params: {},
-      headers: headers
-    }
+          params: {},
+          headers: headers
+    end
 
     context 'when the record exists' do
       it 'returns the service' do
@@ -61,7 +61,7 @@ RSpec.describe 'Services', type: :request do
   end
 
   describe 'POST /services' do
-    let(:valid_attributes) {
+    let(:valid_attributes) do
       {
         name: example_name,
         description: example_description,
@@ -69,7 +69,7 @@ RSpec.describe 'Services', type: :request do
         min_cost: example_min_cost,
         image_url: example_image_url
       }.to_json
-    }
+    end
 
     context 'when the request is valid' do
       before { post '/services', params: valid_attributes, headers: headers }
@@ -115,7 +115,7 @@ RSpec.describe 'Services', type: :request do
   end
 
   describe 'DELETE /services/:id' do
-    before { delete "/services/#{service_id}", params: {}, headers:  headers }
+    before { delete "/services/#{service_id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

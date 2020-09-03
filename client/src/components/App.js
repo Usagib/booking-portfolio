@@ -1,5 +1,11 @@
 import React from 'react';
-import logo from '../logo.svg';
+import PropTypes from 'prop-types';
+import { withCookies } from 'react-cookie';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
 import Navigation from './Navigation';
 import Home from './Home';
 import ServiceSelect from './ServiceSelect';
@@ -9,51 +15,49 @@ import Signup from './Signup';
 import DatePicker from './DatePicker';
 import Profile from './Profile';
 import Logout from './Logout';
-import { withCookies } from 'react-cookie';
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+const App = props => {
+  const { cookies } = props;
+  return (
+    <Router>
+      <div className="App">
+        <Navigation cookies={cookies} />
+        <Switch>
+          <Route path="/services">
+            <Services cookies={cookies} />
+          </Route>
+          <Route path="/serviceselect">
+            <ServiceSelect cookies={cookies} />
+          </Route>
+          <Route path="/datepick">
+            <DatePicker cookies={cookies} />
+          </Route>
+          <Route path="/login">
+            <Login cookies={cookies} />
+          </Route>
+          <Route path="/signup">
+            <Signup cookies={cookies} />
+          </Route>
+          <Route path="/profile">
+            <Profile cookies={cookies} />
+          </Route>
+          <Route path="/logout">
+            <Logout cookies={cookies} />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
+};
 
-class App extends React.Component {
-  render() {
-    return (
-      <Router>
-        <div className="App">
-          <Navigation cookies={this.props.cookies} />
-          <Switch>
-            <Route path="/services">
-              <Services cookies={this.props.cookies} />
-            </Route>
-            <Route path="/serviceselect">
-              <ServiceSelect cookies={this.props.cookies} />
-            </Route>
-            <Route path="/datepick">
-              <DatePicker cookies={this.props.cookies} />
-            </Route>
-            <Route path="/login">
-              <Login cookies={this.props.cookies}/>
-            </Route>
-            <Route path="/signup">
-              <Signup cookies={this.props.cookies}/>
-            </Route>
-            <Route path="/profile">
-              <Profile cookies={this.props.cookies}/>
-            </Route>
-            <Route path="/logout">
-              <Logout cookies={this.props.cookies}/>
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    );
-  }
-}
+App.propTypes = {
+  cookies: PropTypes.shape({
+    set: PropTypes.func.isRequired,
+    get: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default withCookies(App);

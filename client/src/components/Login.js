@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
+import qs from 'qs';
 import { connect } from 'react-redux';
-import { login } from '../actions/index';
 import { Redirect } from 'react-router-dom';
-
+import { login } from '../actions/index';
 
 class Login extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class Login extends React.Component {
 
   handleChange(event) {
     event.preventDefault();
-    switch(event.target.id) {
+    switch (event.target.id) {
       case 'Email':
         this.setState({
           userEmail: event.target.value,
@@ -43,7 +44,6 @@ class Login extends React.Component {
 
   handleLogin(event) {
     event.preventDefault();
-    const qs = require('qs');
     const { userEmail, userPassword } = this.state;
     const { loginSubmit, cookies } = this.props;
 
@@ -51,39 +51,40 @@ class Login extends React.Component {
       {
         email: userEmail,
         password: userPassword,
-      }
+      },
     )).then(response => {
-       this.setState({
-         userPassword: '',
-         authToken: response.data.auth_token,
-         name: response.data.user.name,
-         company: response.data.user.company,
-         id: response.data.user.id,
-         email: response.data.user.email,
-       });
-       console.log(this.state);
-       loginSubmit(this.state);
-     }).then(()=>{
-       const { authToken, id, email, name, company } = this.state;
-       cookies.set('id', id, { path: '/' });
-       cookies.set('authToken', authToken, { path: '/' });
-       cookies.set('email', email, { path: '/' });
-       cookies.set('name', name, { path: '/' });
-       cookies.set('company', company, { path: '/'});
-     }).then(() =>{
-        window.location.reload(false);
-     })
-      .catch(error => {console.log(error)});
+      this.setState({
+        userPassword: '',
+        authToken: response.data.auth_token,
+        name: response.data.user.name,
+        company: response.data.user.company,
+        id: response.data.user.id,
+        email: response.data.user.email,
+      });
+      loginSubmit(this.state);
+    }).then(() => {
+      const {
+        authToken, id, email, name, company,
+      } = this.state;
+      cookies.set('id', id, { path: '/' });
+      cookies.set('authToken', authToken, { path: '/' });
+      cookies.set('email', email, { path: '/' });
+      cookies.set('name', name, { path: '/' });
+      cookies.set('company', company, { path: '/' });
+    }).then(() => {
+      window.location.reload(false);
+    });
   }
 
   renderRedirect() {
     const { cookies } = this.props;
     if (cookies.get('authToken') !== 'null') {
-      return <Redirect to='/profile' />
+      return <Redirect to="/profile" />;
     }
+    return true;
   }
 
-  render(){
+  render() {
     const { userEmail, userPassword } = this.state;
     return (
       <div className="login-container">
@@ -91,44 +92,48 @@ class Login extends React.Component {
         <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
           <h1 className="display-4">Hello.</h1>
           <form>
-              <div className="form-group">
-                  <input
-                    id="Email"
-                    onChange={this.handleChange}
-                    placeholder="Your Email"
-                    value={userEmail}
-                    className="form-control form-control-lg"
-                    type="email"
-                  />
-              </div>
-              <div className="form-group">
-                  <input
-                    id="Password"
-                    onChange={this.handleChange}
-                    placeholder="Your Password"
-                    value={userPassword}
-                    className="form-control form-control-lg"
-                    type="password"/>
-              </div>
-              <div className="form-group">
-                  <button
-                    className="btn btn-dark btn-lg btn-block"
-                    type="submit"
-                    onClick={this.handleLogin}
-                    >
-                      Log In
-                    </button>
-                    <small className="form-text text-black">Not yet registered?, <a href="/signup">click here</a></small>
-              </div>
+            <div className="form-group">
+              <input
+                id="Email"
+                onChange={this.handleChange}
+                placeholder="Your Email"
+                value={userEmail}
+                className="form-control form-control-lg"
+                type="email"
+              />
+            </div>
+            <div className="form-group">
+              <input
+                id="Password"
+                onChange={this.handleChange}
+                placeholder="Your Password"
+                value={userPassword}
+                className="form-control form-control-lg"
+                type="password"
+              />
+            </div>
+            <div className="form-group">
+              <button
+                className="btn btn-dark btn-lg btn-block"
+                type="submit"
+                onClick={this.handleLogin}
+              >
+                Log In
+              </button>
+              <small className="form-text text-black">
+                Not yet registered?,
+                <a href="/signup">click here</a>
+              </small>
+            </div>
           </form>
         </div>
       </div>
-    )
+    );
   }
 }
 const mapStateToProps = (state, ownProps) => ({
-    credentials: state.authentication,
-    cookies: ownProps.cookies,
+  credentials: state.authentication,
+  cookies: ownProps.cookies,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -136,5 +141,13 @@ const mapDispatchToProps = dispatch => ({
     dispatch(login(credential));
   },
 });
+
+Login.propTypes = {
+  cookies: PropTypes.shape({
+    set: PropTypes.func.isRequired,
+    get: PropTypes.func.isRequired,
+  }).isRequired,
+  loginSubmit: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

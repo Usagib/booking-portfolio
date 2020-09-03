@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -9,25 +10,24 @@ class Logout extends React.Component {
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-  renderRedirect() {
-    const { cookies } = this.props;
-    if ( cookies.get('authToken') === 'null') {
-      return <Redirect to='/login' />
-    }
-    else {
-    }
-  }
-
   handleLogout(event) {
     event.preventDefault();
     const { cookies } = this.props;
-    cookies.set('id', null, { path: '/'});
-    cookies.set('authToken', null, { path: '/'});
+    cookies.set('id', null, { path: '/' });
+    cookies.set('authToken', null, { path: '/' });
     cookies.set('email', null, { path: '/' });
     cookies.set('name', null, { path: '/' });
-    cookies.set('company', null, { path: '/'});
-    cookies.set('lastService', null, { path:'/' });
+    cookies.set('company', null, { path: '/' });
+    cookies.set('lastService', null, { path: '/' });
     window.location.reload(false);
+  }
+
+  renderRedirect() {
+    const { cookies } = this.props;
+    if (cookies.get('authToken') === 'null') {
+      return <Redirect to="/login" />;
+    }
+    return true;
   }
 
   render() {
@@ -45,13 +45,20 @@ class Logout extends React.Component {
               >
                 Log out
               </button>
-              </div>
+            </div>
           </form>
         </div>
       </div>
-    )
+    );
   }
 }
+
+Logout.propTypes = {
+  cookies: PropTypes.shape({
+    set: PropTypes.func.isRequired,
+    get: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 const mapStateToProps = (state, ownProps) => ({
   cookies: ownProps.cookies,

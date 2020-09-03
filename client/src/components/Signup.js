@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import qs from 'qs';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../actions/index';
-
 
 class Signup extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class Signup extends React.Component {
 
   handleChange(event) {
     event.preventDefault();
-    switch(event.target.id) {
+    switch (event.target.id) {
       case 'userName':
         this.setState({
           name: event.target.value,
@@ -57,19 +58,20 @@ class Signup extends React.Component {
   }
 
   handleLogin(event) {
-    const qs = require('qs');
-    const { name, userEmail, userPassword, userPasswordConfirmation, company } = this.state;
+    const {
+      name, userEmail, userPassword, userPasswordConfirmation, company,
+    } = this.state;
     const { loginSubmit, cookies } = this.props;
     event.preventDefault();
 
     axios.post('api/signup', qs.stringify(
       {
-        name: name,
+        name,
         email: userEmail,
         password: userPassword,
         password_confirmation: userPasswordConfirmation,
-        company: company,
-      }
+        company,
+      },
     )).then(response => {
       this.setState({
         userPassword: '',
@@ -81,89 +83,93 @@ class Signup extends React.Component {
         email: response.data.user.email,
       });
       loginSubmit(this.state);
-     }).then(() =>{
-       const { authToken, id, email, name, company } = this.state;
-       cookies.set('id', id, { path: '/' });
-       cookies.set('authToken', authToken, { path: '/' });
-       cookies.set('email', email, { path: '/' });
-       cookies.set('name', name, { path: '/' });
-       cookies.set('company', company, { path: '/'});
-     }).then(()=>{
-       window.location.reload(false);
-     })
-      .catch(error => {console.log(error)});
+    }).then(() => {
+      const {
+        authToken, id, email, name, company,
+      } = this.state;
+      cookies.set('id', id, { path: '/' });
+      cookies.set('authToken', authToken, { path: '/' });
+      cookies.set('email', email, { path: '/' });
+      cookies.set('name', name, { path: '/' });
+      cookies.set('company', company, { path: '/' });
+    }).then(() => {
+      window.location.reload(false);
+    });
   }
 
   renderRedirect() {
     const { cookies } = this.props;
     if (cookies.get('authToken') !== 'null') {
-      return <Redirect to='/profile' />
+      return <Redirect to="/profile" />;
     }
+    return true;
   }
 
-  render(){
-    const { userName,
+  render() {
+    const {
+      userName,
       userEmail,
       userPassword,
       userPasswordConfirmation,
-      userCompany } = this.state;
+      userCompany,
+    } = this.state;
     return (
       <div className="login-container">
         {this.renderRedirect()}
-        <div class="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black" id="header">
-          <h1 class="display-4">Thank you.</h1>
+        <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black" id="header">
+          <h1 className="display-4">Thank you.</h1>
           <form>
-            <div class="form-group">
+            <div className="form-group">
               <input
-                  id="userName"
-                  onChange={this.handleChange}
-                  placeholder="Your Name"
-                  value={userName}
-                  className="form-control form-control-lg"
-                  type="text"
+                id="userName"
+                onChange={this.handleChange}
+                placeholder="Your Name"
+                value={userName}
+                className="form-control form-control-lg"
+                type="text"
               />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <input
-                  id="userCompany"
-                  onChange={this.handleChange}
-                  placeholder="Your Company"
-                  value={userCompany}
-                  className="form-control form-control-lg"
-                  type="text"
+                id="userCompany"
+                onChange={this.handleChange}
+                placeholder="Your Company"
+                value={userCompany}
+                className="form-control form-control-lg"
+                type="text"
               />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <input
-                  id="userEmail"
-                  onChange={this.handleChange}
-                  placeholder="Your Email"
-                  value={userEmail}
-                  className="form-control form-control-lg"
-                  type="email"
+                id="userEmail"
+                onChange={this.handleChange}
+                placeholder="Your Email"
+                value={userEmail}
+                className="form-control form-control-lg"
+                type="email"
               />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <input
-                  id="userPassword"
-                  onChange={this.handleChange}
-                  placeholder="Your Password"
-                  value={userPassword}
-                  className="form-control form-control-lg"
-                  type="password"
+                id="userPassword"
+                onChange={this.handleChange}
+                placeholder="Your Password"
+                value={userPassword}
+                className="form-control form-control-lg"
+                type="password"
               />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <input
-                  id="userPasswordConfirmation"
-                  onChange={this.handleChange}
-                  placeholder="Password Confirmation"
-                  value={userPasswordConfirmation}
-                  className="form-control form-control-lg"
-                  type="password"
+                id="userPasswordConfirmation"
+                onChange={this.handleChange}
+                placeholder="Password Confirmation"
+                value={userPasswordConfirmation}
+                className="form-control form-control-lg"
+                type="password"
               />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <button
                 className="btn btn-dark btn-lg btn-block"
                 type="submit"
@@ -171,26 +177,34 @@ class Signup extends React.Component {
               >
                 Register
               </button>
-              <small className="form-text text-black">Already registered?, <a href="/login">click here</a></small>
+              <small className="form-text text-black">
+                Already registered?,
+                <a href="/login">click here</a>
+              </small>
             </div>
           </form>
         </div>
       </div>
-    )
+    );
   }
 }
 
+Signup.propTypes = {
+  cookies: PropTypes.shape({
+    set: PropTypes.func.isRequired,
+    get: PropTypes.func.isRequired,
+  }).isRequired,
+  loginSubmit: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state, ownProps) => ({
-  credentials: state.data,
   cookies: ownProps.cookies,
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    loginSubmit: credential => {
-      dispatch(login(credential))
-    }
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  loginSubmit: credential => {
+    dispatch(login(credential));
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

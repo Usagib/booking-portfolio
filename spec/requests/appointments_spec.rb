@@ -10,15 +10,15 @@ RSpec.describe 'Appointment', type: :request do
   let(:headers) { valid_headers }
 
   example_date = Faker::Date.forward(days: 30)
-  example_time = Faker::Time.forward(days: 5,  period: :evening)
+  example_time = Faker::Time.forward(days: 5, period: :evening)
   example_description = 'this is a description of the'
 
   describe 'GET /services/:service_id/appointments' do
-    before {
+    before do
       get "/services/#{service_id}/appointments",
-      params: {},
-      headers: headers
-     }
+          params: {},
+          headers: headers
+    end
 
     it 'gets appointment from services' do
       expect(json).not_to be_empty
@@ -31,10 +31,11 @@ RSpec.describe 'Appointment', type: :request do
   end
 
   describe 'GET /services/:service_id/appointments/:id' do
-      before {
-        get "/services/#{service_id}/appointments/#{id}",
-        params: {},
-        headers: headers }
+    before do
+      get "/services/#{service_id}/appointments/#{id}",
+          params: {},
+          headers: headers
+    end
 
     context 'it exists' do
       it 'returns the appointment' do
@@ -61,13 +62,13 @@ RSpec.describe 'Appointment', type: :request do
   end
 
   describe 'POST /services/:service_id/appointments' do
-    let(:valid_attributes) {
+    let(:valid_attributes) do
       {
         date: example_date,
         time: example_time,
         description: example_description
       }.to_json
-    }
+    end
 
     context 'when attributes are valid' do
       before { post "/services/#{service_id}/appointments", params: valid_attributes, headers: headers }
@@ -78,7 +79,7 @@ RSpec.describe 'Appointment', type: :request do
     end
 
     context 'when attributes are invalid' do
-      let(:invalid_description) { { description: ''}.to_json }
+      let(:invalid_description) { { description: '' }.to_json }
       before { post "/services/#{service_id}/appointments", params: invalid_description, headers: headers }
 
       it 'http status 422' do
@@ -93,11 +94,11 @@ RSpec.describe 'Appointment', type: :request do
   end
 
   describe 'PUT /services/:service_id/appointments/:id' do
-    let(:valid_attributes) {
+    let(:valid_attributes) do
       {
-            description: "This is the updated description for appointment"
+        description: 'This is the updated description for appointment'
       }.to_json
-    }
+    end
 
     before { put "/services/#{service_id}/appointments/#{id}", params: valid_attributes, headers: headers }
 
@@ -120,8 +121,8 @@ RSpec.describe 'Appointment', type: :request do
       end
 
       it 'returns a not found message' do
-       expect(response.body).to match(/Couldn't find Appointment/)
-     end
+        expect(response.body).to match(/Couldn't find Appointment/)
+      end
     end
   end
 

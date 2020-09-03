@@ -1,5 +1,5 @@
 class ServicesController < ApplicationController
-  before_action :set_service, only: [:show, :update, :destroy]
+  before_action :set_service, only: %i[show update destroy]
 
   def index
     @services = @current_user.services
@@ -26,6 +26,7 @@ class ServicesController < ApplicationController
   end
 
   private
+
   def service_params
     params.permit(:name, :description, :max_cost, :min_cost)
   end
@@ -33,5 +34,4 @@ class ServicesController < ApplicationController
   def set_service
     @service = Service.find(params[:id])
   end
-
 end
