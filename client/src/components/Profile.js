@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -151,12 +152,11 @@ class Profile extends React.Component {
                 <div className="row">
                   {servicesList.map(service => (
                     <div className="col-md-3 mb-5" key={service.id}>
-                      <p>{service.id}</p>
                       <p>{service.name}</p>
-                      <p>{service.description}</p>
-                      <p>{service.max_cost}</p>
-                      <p>{service.min_cost}</p>
-                      <a href="/datepick">
+                      <p>notes: {service.description}</p>
+                      <p>Max budget: ${service.max_cost}</p>
+                      <p>Min budget: ${service.min_cost}</p>
+                      <Link to="/datepick">
                         <button
                           type="button"
                           onClick={event => this.bookAppointment(service.id, event)}
@@ -164,7 +164,7 @@ class Profile extends React.Component {
                           >
                           Book an appointment
                         </button>
-                      </a>
+                      </Link>
                       <button
                         type="button"
                         onClick={event => this.cancelService(service.id, event)}

@@ -88,7 +88,7 @@ class DatePicker extends React.Component {
       <div className="login-container">
         {this.renderRedirect()}
         <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
-          <h1 className="display-4">Let`&apos`s meet.</h1>
+          <h1 className="display-4">Lets meet.</h1>
           <form>
             <div className="form-group">
               <input
