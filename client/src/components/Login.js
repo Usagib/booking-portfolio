@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import qs from 'qs';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../actions/index';
@@ -47,16 +46,14 @@ class Login extends React.Component {
     const { userEmail, userPassword } = this.state;
     const { loginSubmit, cookies } = this.props;
 
-    axios.post('api/auth/login/',
+    axios('https://usagi-booking-api.herokuapp.com/api/auth/login',
       {
+        method: 'POST',
+        mode: 'cors',
         email: userEmail,
         password: userPassword,
-      },
-      {
-        'Access-Control-Allow-Origin': 'https://usagi-booking-api.herokuapp.com/api/auth/login',
       }
     ).then(response => {
-      console.log(response);
       this.setState({
         userPassword: '',
         authToken: response.data.auth_token,
@@ -64,7 +61,7 @@ class Login extends React.Component {
         company: response.data.user.company,
         id: response.data.user.id,
         email: response.data.user.email,
-      }).catch((err) => {console.log(err);});
+      });
       loginSubmit(this.state);
     }).then(() => {
       const {
@@ -77,7 +74,7 @@ class Login extends React.Component {
       cookies.set('company', company, { path: '/' });
     }).then(() => {
       window.location.reload(false);
-    });
+    }).catch((error) => {console.log(error)});
   }
 
   renderRedirect() {
