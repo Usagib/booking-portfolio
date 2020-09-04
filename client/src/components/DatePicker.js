@@ -51,7 +51,7 @@ class DatePicker extends React.Component {
     } = this.state;
     const { cookies } = this.props;
     const authToken = cookies.get('authToken');
-    const url = `api/services/${serviceId}/appointments/`;
+    const url = `https://usagi-booking-api.herokuapp.com/api/services/${serviceId}/appointments/`;
     const headers = {
       Authorization: authToken,
     };
@@ -90,7 +90,7 @@ class DatePicker extends React.Component {
         <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
           <h1 className="display-4">Lets meet.</h1>
           <form>
-            <div className="form-group">
+            <div className="form-group fadeIn">
               <input
                 id="Date"
                 className="form-control form-control-lg"
@@ -99,7 +99,7 @@ class DatePicker extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div className="form-group">
+            <div className="form-group fadeIn">
               <input
                 id="Time"
                 className="form-control form-control-lg"
@@ -108,7 +108,7 @@ class DatePicker extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div className="form-group">
+            <div className="form-group fadeIn">
               <input
                 id="AptDescription"
                 className="form-control form-control-lg"
@@ -117,7 +117,7 @@ class DatePicker extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div className="form-group">
+            <div className="form-group fadeIn">
               <button
                 className="btn btn-dark btn-lg btn-block"
                 type="submit"

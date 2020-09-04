@@ -64,13 +64,13 @@ class Signup extends React.Component {
     const { loginSubmit, cookies } = this.props;
     event.preventDefault();
 
-    axios.post('api/signup', qs.stringify(
+    axios.post('https://usagi-booking-api.herokuapp.com/api/signup', qs.stringify(
       {
-        name,
+        name: name,
         email: userEmail,
         password: userPassword,
         password_confirmation: userPasswordConfirmation,
-        company,
+        company: company,
       },
     )).then(response => {
       this.setState({
@@ -99,7 +99,7 @@ class Signup extends React.Component {
 
   renderRedirect() {
     const { cookies } = this.props;
-    if (cookies.get('authToken') !== 'null') {
+    if (cookies.get('authToken') !== 'null' && cookies.get('authToken') !== undefined) {
       return <Redirect to="/profile" />;
     }
     return true;
@@ -117,9 +117,9 @@ class Signup extends React.Component {
       <div className="login-container">
         {this.renderRedirect()}
         <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black" id="header">
-          <h1 className="display-4">Thank you.</h1>
+          <h1 className="display-4 fadeIn fadeIn-first">Thank you.</h1>
           <form>
-            <div className="form-group">
+            <div className="form-group fadeIn fadeIn-second">
               <input
                 id="userName"
                 onChange={this.handleChange}
@@ -129,7 +129,7 @@ class Signup extends React.Component {
                 type="text"
               />
             </div>
-            <div className="form-group">
+            <div className="form-group fadeIn fadeIn-second">
               <input
                 id="userCompany"
                 onChange={this.handleChange}
@@ -139,7 +139,7 @@ class Signup extends React.Component {
                 type="text"
               />
             </div>
-            <div className="form-group">
+            <div className="form-group fadeIn fadeIn-third">
               <input
                 id="userEmail"
                 onChange={this.handleChange}
@@ -149,7 +149,7 @@ class Signup extends React.Component {
                 type="email"
               />
             </div>
-            <div className="form-group">
+            <div className="form-group fadeIn fadeIn-third">
               <input
                 id="userPassword"
                 onChange={this.handleChange}
@@ -159,7 +159,7 @@ class Signup extends React.Component {
                 type="password"
               />
             </div>
-            <div className="form-group">
+            <div className="form-group fadeIn fadeIn-fourth">
               <input
                 id="userPasswordConfirmation"
                 onChange={this.handleChange}
@@ -169,7 +169,7 @@ class Signup extends React.Component {
                 type="password"
               />
             </div>
-            <div className="form-group">
+            <div className="form-group fadeIn fadeIn-fourth">
               <button
                 className="btn btn-dark btn-lg btn-block"
                 type="submit"

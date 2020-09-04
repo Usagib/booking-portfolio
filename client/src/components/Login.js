@@ -46,10 +46,8 @@ class Login extends React.Component {
     const { userEmail, userPassword } = this.state;
     const { loginSubmit, cookies } = this.props;
 
-    axios('https://usagi-booking-api.herokuapp.com/api/auth/login',
+    axios.post('https://usagi-booking-api.herokuapp.com/api/auth/login',
       {
-        method: 'POST',
-        mode: 'cors',
         email: userEmail,
         password: userPassword,
       }
@@ -79,7 +77,7 @@ class Login extends React.Component {
 
   renderRedirect() {
     const { cookies } = this.props;
-    if (cookies.get('authToken') !== 'null') {
+    if (cookies.get('authToken') !== 'null' && cookies.get('authToken') !== undefined) {
       return <Redirect to="/profile" />;
     }
     return true;
@@ -91,9 +89,9 @@ class Login extends React.Component {
       <div className="login-container">
         {this.renderRedirect()}
         <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
-          <h1 className="display-4">Hello.</h1>
+          <h1 className="display-4 fadeIn fadeIn-first">Hello.</h1>
           <form>
-            <div className="form-group">
+            <div className="form-group fadeIn fadeIn-second">
               <input
                 id="Email"
                 onChange={this.handleChange}
@@ -103,7 +101,7 @@ class Login extends React.Component {
                 type="email"
               />
             </div>
-            <div className="form-group">
+            <div className="form-group fadeIn fadeIn-third">
               <input
                 id="Password"
                 onChange={this.handleChange}
@@ -113,7 +111,7 @@ class Login extends React.Component {
                 type="password"
               />
             </div>
-            <div className="form-group">
+            <div className="form-group fadeIn fadeIn-fourth">
               <button
                 className="btn btn-dark btn-lg btn-block"
                 type="submit"

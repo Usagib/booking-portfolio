@@ -100,6 +100,14 @@ body {
   height: auto;
 }
 
+.service-card {
+  min-width: 200px;
+}
+
+.appointment-card {
+  min-width: 200px;
+}
+
 .login-container {
   height: 100vh;
 }
@@ -166,25 +174,25 @@ body {
   animation-duration:1s;
 }
 
-.fadeIn.first {
+.fadeIn-first {
   -webkit-animation-delay: 0.4s;
   -moz-animation-delay: 0.4s;
   animation-delay: 0.4s;
 }
 
-.fadeIn.second {
+.fadeIn-second {
   -webkit-animation-delay: 0.6s;
   -moz-animation-delay: 0.6s;
   animation-delay: 0.6s;
 }
 
-.fadeIn.third {
+.fadeIn-third {
   -webkit-animation-delay: 0.8s;
   -moz-animation-delay: 0.8s;
   animation-delay: 0.8s;
 }
 
-.fadeIn.fourth {
+.fadeIn-fourth {
   -webkit-animation-delay: 1s;
   -moz-animation-delay: 1s;
   animation-delay: 1s;

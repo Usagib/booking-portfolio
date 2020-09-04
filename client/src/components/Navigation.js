@@ -32,7 +32,7 @@ class Navigation extends React.Component {
   render() {
     const { cookies } = this.props;
     const { toggleSidebar } = this.state;
-    const logged = cookies.get('authToken') !== 'null';
+    const logged = cookies.get('authToken') !== 'null' && cookies.get('authToken') !== undefined;
     return (
       <div>
         <button

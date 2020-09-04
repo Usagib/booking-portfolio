@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -18,6 +18,7 @@ class Profile extends React.Component {
     this.cancelAppointment = this.cancelAppointment.bind(this);
     this.cancelService = this.cancelService.bind(this);
     this.bookAppointment = this.bookAppointment.bind(this);
+    this.renderRedirect = this.renderRedirect.bind(this);
   }
 
   getServices() {
@@ -26,7 +27,7 @@ class Profile extends React.Component {
     const headers = {
       Authorization: authToken,
     };
-    axios.get('api/services', {
+    axios.get('https://usagi-booking-api.herokuapp.com/api/services', {
       headers,
     }).then(response => {
       this.setState({
@@ -51,7 +52,7 @@ class Profile extends React.Component {
     };
 
     for (let i = 0; i < servicesList.length; i += 1) {
-      axios.get(`api/services/${servicesList[i].id}/appointments/`, {
+      axios.get(`https://usagi-booking-api.herokuapp.com/api/services/${servicesList[i].id}/appointments/`, {
         headers,
       }).then(response => {
         const { data } = response;
@@ -82,7 +83,7 @@ class Profile extends React.Component {
     const headers = {
       Authorization: authToken,
     };
-    const url = `/api/services/${sId}/appointments/${aId}/`;
+    const url = `https://usagi-booking-api.herokuapp.com/api/services/${sId}/appointments/${aId}/`;
     axios.delete(url, {
       headers,
     }).then(() => {
@@ -97,7 +98,7 @@ class Profile extends React.Component {
     const headers = {
       Authorization: authToken,
     };
-    const url = `/api/services/${sId}/`;
+    const url = `https://usagi-booking-api.herokuapp.com/api/services/${sId}/`;
     axios.delete(url, {
       headers,
     }).then(() => {
@@ -108,7 +109,17 @@ class Profile extends React.Component {
   bookAppointment(sId, event) {
     event.preventDefault();
     const { cookies } = this.props;
+    console.log(sId);
     cookies.set('lastService', sId, { path: '/' });
+    this.renderRedirect();
+  }
+
+  renderRedirect() {
+    const { cookies } = this.props;
+    if( cookies.get('lastService') !== 'null') {
+      return <Redirect to='/datepick' />
+    }
+    return true;
   }
 
   render() {
@@ -120,16 +131,10 @@ class Profile extends React.Component {
         {this.getServices()}
         <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
           <h1 className="display-4">
-            Good to see you
-            {cookies.get('name')}
+            Good to see you {cookies.get('name')}
           </h1>
           <h5 className="display-5">
-            Your email:
             {cookies.get('email')}
-          </h5>
-          <h5 className="display-5">
-            Your company:
-            {cookies.get('company')}
           </h5>
           <div />
           <div id="accordion" className="text-center">
@@ -151,20 +156,18 @@ class Profile extends React.Component {
               <div id="collapseUserServices" className="collapse" aria-labelledby="userServices" data-parent="#accordion">
                 <div className="row">
                   {servicesList.map(service => (
-                    <div className="col-md-3 mb-5" key={service.id}>
+                    <div className="col-md-4 mb-5 service-card" key={service.id}>
                       <p>{service.name}</p>
                       <p>notes: {service.description}</p>
                       <p>Max budget: ${service.max_cost}</p>
                       <p>Min budget: ${service.min_cost}</p>
-                      <Link to="/datepick">
-                        <button
+                        {/*<button
                           type="button"
                           onClick={event => this.bookAppointment(service.id, event)}
                           className="btn btn-dark"
                           >
                           Book an appointment
-                        </button>
-                      </Link>
+                        </button> */}
                       <button
                         type="button"
                         onClick={event => this.cancelService(service.id, event)}
@@ -196,7 +199,7 @@ class Profile extends React.Component {
               <div id="collapseUserAppointments" className="collapse" aria-labelledby="userAppointments" data-parent="#accordion">
                 <div className="row">
                   {appointmentsList.map(appointment => (
-                    <div className="col-md-3 mb-5" key={appointment.id}>
+                    <div className="col-md-3 mb-5 appointment-card" key={appointment.id}>
                       <p>
                         For service #
                         {appointment.service_id}

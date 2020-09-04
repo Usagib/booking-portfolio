@@ -99,7 +99,7 @@ class ServiceSelect extends React.Component {
     };
     event.preventDefault();
 
-    axios.post('api/services/', qs.stringify(
+    axios.post('https://usagi-booking-api.herokuapp.com/api/services/', qs.stringify(
       {
         name,
         description,
@@ -117,7 +117,7 @@ class ServiceSelect extends React.Component {
 
   renderRedirect() {
     const { cookies } = this.props;
-    if (cookies.get('authToken') === 'null') {
+    if (cookies.get('authToken') === 'null' || cookies.get('authToken') === undefined) {
       return <Redirect to="/login" />;
     } if (cookies.get('lastService') !== 'null') {
       return <Redirect to="/datepick" />;
@@ -147,9 +147,9 @@ class ServiceSelect extends React.Component {
         {this.renderRedirect()}
         <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
           <div />
-          <h1 className="display-4">Select a service</h1>
+          <h1 className="display-4 fadeIn fadeIn-first">Select a service</h1>
           <form className="bg-white mx-5 my-5 px-5 py-5 rounded">
-            <div className="form-group">
+            <div className="form-group fadeIn fadeIn-second">
               <select
                 className="form-control"
                 id="serviceName"
@@ -165,7 +165,7 @@ class ServiceSelect extends React.Component {
                 ))}
               </select>
             </div>
-            <div className="form-group row">
+            <div className="form-group row fadeIn fadeIn-third">
               <input
                 id="Min"
                 className="col-md-6 form-control"
@@ -181,7 +181,7 @@ class ServiceSelect extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div className="form-group">
+            <div className="form-group fadeIn fadeIn-third">
               <input
                 id="Notes"
                 className="form-control form-control-lg"
@@ -190,7 +190,7 @@ class ServiceSelect extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div className="form-group">
+            <div className="form-group fadeIn fadeIn-fourth">
               <button
                 className="btn btn-dark btn-lg btn-block"
                 type="submit"

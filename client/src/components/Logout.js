@@ -35,9 +35,9 @@ class Logout extends React.Component {
       <div className="login-container">
         {this.renderRedirect()}
         <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
-          <h1 className="display-4">See you later.</h1>
+          <h1 className="display-4 fadeIn">See you later.</h1>
           <form>
-            <div className="form-group">
+            <div className="form-group fadeIn">
               <button
                 className="btn btn-danger btn-lg btn-block"
                 type="submit"
