@@ -13,8 +13,8 @@ a:hover {
 }
 
 .close {
-    font-size: 50px;
-    display:block;
+  font-size: 50px;
+  display: block;
 }
 
 .vertical-nav {
@@ -50,26 +50,21 @@ a:hover {
   #sidebar {
     margin-left: -17rem;
   }
+
   #sidebar.active {
     margin-left: 0;
   }
+
   #content {
     width: 100%;
     margin: 0;
   }
+
   #content.active {
     margin-left: 17rem;
     width: calc(100% - 17rem);
   }
 }
-
-/*
-*
-* ==========================================
-* FOR DEMO PURPOSE
-* ==========================================
-*
-*/
 
 body {
   background: #fff;
@@ -116,48 +111,17 @@ body {
   height: 100%;
 }
 
-/* ANIMATIONS */
-
-/* Simple CSS3 Fade-in-down Animation */
-.fadeInDown {
-  -webkit-animation-name: fadeInDown;
-  animation-name: fadeInDown;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
+@-webkit-keyframes fadeIn {
+  from { opacity:0; } to { opacity:1; }
 }
 
-@-webkit-keyframes fadeInDown {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
+@-moz-keyframes fadeIn {
+  from { opacity:0; } to { opacity:1; }
 }
 
-@keyframes fadeInDown {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
+@keyframes fadeIn {
+  from { opacity:0; } to { opacity:1; }
 }
-
-/* Simple CSS3 Fade-in Animation */
-@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
 .fadeIn {
   opacity:0;
