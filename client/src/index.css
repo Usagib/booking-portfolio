@@ -127,15 +127,13 @@ body {
 }
 
 .fadein {
-  opacity:0;
+  opacity: 0;
   -webkit-animation: fadein ease-in 1;
   -moz-animation: fadein ease-in 1;
   animation: fadein ease-in 1;
-
   -webkit-animation-fill-mode: forwards;
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
-
   -webkit-animation-duration: 1s;
   -moz-animation-duration: 1s;
   animation-duration: 1s;
