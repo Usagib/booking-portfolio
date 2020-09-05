@@ -89,9 +89,9 @@ class Login extends React.Component {
       <div className="login-container">
         {this.renderRedirect()}
         <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
-          <h1 className="display-4 fadeIn fadeIn-first">Hello.</h1>
+          <h1 className="display-4 fadein fadein-first">Hello.</h1>
           <form>
-            <div className="form-group fadeIn fadeIn-second">
+            <div className="form-group fadein fadein-second">
               <input
                 id="Email"
                 onChange={this.handleChange}
@@ -101,7 +101,7 @@ class Login extends React.Component {
                 type="email"
               />
             </div>
-            <div className="form-group fadeIn fadeIn-third">
+            <div className="form-group fadein fadein-third">
               <input
                 id="Password"
                 onChange={this.handleChange}
@@ -111,7 +111,7 @@ class Login extends React.Component {
                 type="password"
               />
             </div>
-            <div className="form-group fadeIn fadeIn-fourth">
+            <div className="form-group fadein fadein-fourth">
               <button
                 className="btn btn-dark btn-lg btn-block"
                 type="submit"

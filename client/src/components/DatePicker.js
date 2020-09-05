@@ -90,7 +90,7 @@ class DatePicker extends React.Component {
         <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
           <h1 className="display-4">Lets meet.</h1>
           <form>
-            <div className="form-group fadeIn">
+            <div className="form-group fadein">
               <input
                 id="Date"
                 className="form-control form-control-lg"
@@ -99,7 +99,7 @@ class DatePicker extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div className="form-group fadeIn">
+            <div className="form-group fadein">
               <input
                 id="Time"
                 className="form-control form-control-lg"
@@ -108,7 +108,7 @@ class DatePicker extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div className="form-group fadeIn">
+            <div className="form-group fadein">
               <input
                 id="AptDescription"
                 className="form-control form-control-lg"
@@ -117,7 +117,7 @@ class DatePicker extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div className="form-group fadeIn">
+            <div className="form-group fadein">
               <button
                 className="btn btn-dark btn-lg btn-block"
                 type="submit"

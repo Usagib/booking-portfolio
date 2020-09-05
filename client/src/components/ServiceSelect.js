@@ -147,9 +147,9 @@ class ServiceSelect extends React.Component {
         {this.renderRedirect()}
         <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
           <div />
-          <h1 className="display-4 fadeIn fadeIn-first">Select a service</h1>
+          <h1 className="display-4 fadein fadein-first">Select a service</h1>
           <form className="bg-white mx-5 my-5 px-5 py-5 rounded">
-            <div className="form-group fadeIn fadeIn-second">
+            <div className="form-group fadein fadein-second">
               <select
                 className="form-control"
                 id="serviceName"
@@ -165,7 +165,7 @@ class ServiceSelect extends React.Component {
                 ))}
               </select>
             </div>
-            <div className="form-group row fadeIn fadeIn-third">
+            <div className="form-group row fadein fadein-third">
               <input
                 id="Min"
                 className="col-md-6 form-control"
@@ -181,7 +181,7 @@ class ServiceSelect extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div className="form-group fadeIn fadeIn-third">
+            <div className="form-group fadein fadein-third">
               <input
                 id="Notes"
                 className="form-control form-control-lg"
@@ -190,7 +190,7 @@ class ServiceSelect extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div className="form-group fadeIn fadeIn-fourth">
+            <div className="form-group fadein fadein-fourth">
               <button
                 className="btn btn-dark btn-lg btn-block"
                 type="submit"
