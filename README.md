@@ -15,6 +15,7 @@
 
 ## Table of Contents
 
+* [Version Notes](#version-notes)
 * [About the Project](#about-the-project)
 * [Live Demo](#live-demo)
 * [How to run](#how-to-run)
@@ -23,6 +24,15 @@
 * [Screenshots](#screenshots)
 * [Built With](#built-with)
 * [Contact](#contact)
+
+## Version Notes
+### VERSION 1.1 Update
+Booking portfolio got a radical makeover: check out the new smooth UX
+![Screenshot11](screenshot/sc11.png)
+![Screenshot12](screenshot/sc12.png)
+![Screenshot13](screenshot/sc13.png)
+![Screenshot14](screenshot/sc14.png)
+![Screenshot15](screenshot/sc15.png)
 
 ## About The Project
 
