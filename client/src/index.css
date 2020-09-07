@@ -43,21 +43,21 @@
 .configure-btn {
   border-radius: 50px;
   font-size: 1rem;
-  background-color: #97BF0F;
+  background-color: #97bf0f;
   font-family: 'Poppins', sans-serif;
 }
 
 .carousel-title {
   margin-top: 45%;
   margin-bottom: 5%;
-  font-family: 'itcBauhausBold';
+  font-family: 'itcBauhausBold', sans-serif;
   font-size: 2.7rem;
   letter-spacing: 10px;
 }
 
 .home-title {
   margin-top: 40%;
-  font-family: 'itcBauhausBold';
+  font-family: 'itcBauhausBold', sans-serif;
   font-size: 5rem;
   letter-spacing: 10px;
   background-color: black;
@@ -67,9 +67,8 @@
   font-family: 'Poppins', sans-serif;
 }
 
-
 .log-title {
-  font-family: 'itcBauhausBold';
+  font-family: 'itcBauhausBold', sans-serif;
   font-size: 2.7rem;
   letter-spacing: 10px;
 }
@@ -78,7 +77,6 @@
   font-family: 'Poppins', sans-serif;
   color: black;
 }
-
 
 a {
   text-decoration: none;
@@ -144,7 +142,8 @@ a:hover {
 
 body {
   background: #fff;
-  /*background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);*/
+
+  /* background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea); */
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -240,9 +239,9 @@ body {
 }
 
 .select .carousel-indicators {
-	left: 0;
-	top: auto;
-    bottom: -40px;
+  left: 0;
+  top: auto;
+  bottom: -40px;
 }
 
 .btn-carousel {
@@ -258,21 +257,17 @@ body {
   margin-left: 50%;
 }
 
-.carousel-item {
-  height: 100vh;
-}
-
 .inner-sv {
   height: auto !important;
 }
 
 .carousel-indicators li {
-    background: #a3a3a3;
-    border-radius: 50%;
-    width: 8px;
-    height: 8px;
+  background: #a3a3a3;
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
 }
 
 .carousel-indicators .active {
-background: #707070;
+  background: #707070;
 }

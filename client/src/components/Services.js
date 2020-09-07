@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { faCog, faPlayCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCog, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Services extends React.Component {
@@ -37,7 +37,7 @@ class Services extends React.Component {
                 <button type="button" className="fadein fadein-second btn configure-btn float-center">
                   <a href="/catalog">
                     <FontAwesomeIcon icon={faCog} />
-                      <span className="mx-2">Configure</span>
+                    <span className="mx-2">Configure</span>
                     <FontAwesomeIcon icon={faPlayCircle} />
                   </a>
                 </button>

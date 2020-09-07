@@ -50,8 +50,7 @@ class Login extends React.Component {
       {
         email: userEmail,
         password: userPassword,
-      }
-    ).then(response => {
+      }).then(response => {
       this.setState({
         userPassword: '',
         authToken: response.data.auth_token,
@@ -72,7 +71,7 @@ class Login extends React.Component {
       cookies.set('company', company, { path: '/' });
     }).then(() => {
       window.location.reload(false);
-    }).catch((error) => {console.log(error)});
+    });
   }
 
   renderRedirect() {

@@ -152,9 +152,9 @@ class ServiceSelect extends React.Component {
               <h1 className="catalog-title fadein fadein-first mb-5">Configure a Service</h1>
               <form className="rounded">
                 <div className="form-group fadein fadein-second">
-                  <label className="catalog-subtitle" for="#Min">
+                  <h1 className="catalog-subtitle">
                     Service:
-                  </label>
+                  </h1>
                   <select
                     className="form-control"
                     id="serviceName"
@@ -171,9 +171,9 @@ class ServiceSelect extends React.Component {
                   </select>
                 </div>
                 <div className="form-group fadein fadein-third">
-                  <label className="catalog-subtitle" for="#Min">
+                  <h1 className="catalog-subtitle">
                     Your minimum budget
-                  </label>
+                  </h1>
                   <input
                     id="Min"
                     className="col-md-6 form-control"
@@ -183,9 +183,9 @@ class ServiceSelect extends React.Component {
                   />
                 </div>
                 <div className="form-group fadein fadein-third">
-                  <label className="catalog-subtitle" for="#Min">
+                  <h1 className="catalog-subtitle">
                     Your maximum budget
-                  </label>
+                  </h1>
                   <input
                     id="Max"
                     className="col-md-6 form-control"

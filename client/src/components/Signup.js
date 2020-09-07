@@ -66,11 +66,11 @@ class Signup extends React.Component {
 
     axios.post('https://usagi-booking-api.herokuapp.com/api/signup', qs.stringify(
       {
-        name: name,
+        name,
         email: userEmail,
         password: userPassword,
         password_confirmation: userPasswordConfirmation,
-        company: company,
+        company,
       },
     )).then(response => {
       this.setState({

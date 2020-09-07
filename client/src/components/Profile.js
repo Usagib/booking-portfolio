@@ -109,15 +109,14 @@ class Profile extends React.Component {
   bookAppointment(sId, event) {
     event.preventDefault();
     const { cookies } = this.props;
-    console.log(sId);
     cookies.set('lastService', sId, { path: '/' });
     this.renderRedirect();
   }
 
   renderRedirect() {
     const { cookies } = this.props;
-    if( cookies.get('lastService') !== 'null') {
-      return <Redirect to='/datepick' />
+    if (cookies.get('lastService') !== 'null') {
+      return <Redirect to="/datepick" />;
     }
     return true;
   }
@@ -131,7 +130,9 @@ class Profile extends React.Component {
         {this.getServices()}
         <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
           <h1 className="log-title">
-            Good to see you {cookies.get('name')}
+            Good to see you
+            {' '}
+            {cookies.get('name')}
           </h1>
           <h5 className="log-subtitle">
             {cookies.get('email')}
@@ -158,9 +159,18 @@ class Profile extends React.Component {
                   {servicesList.map(service => (
                     <div className="col-md-4 mb-5 service-card" key={service.id}>
                       <p>{service.name}</p>
-                      <p>notes: {service.description}</p>
-                      <p>Max budget: ${service.max_cost}</p>
-                      <p>Min budget: ${service.min_cost}</p>
+                      <p>
+                        notes:
+                        {service.description}
+                      </p>
+                      <p>
+                        Max budget: $
+                        {service.max_cost}
+                      </p>
+                      <p>
+                        Min budget: $
+                        {service.min_cost}
+                      </p>
                       <button
                         type="button"
                         onClick={event => this.cancelService(service.id, event)}

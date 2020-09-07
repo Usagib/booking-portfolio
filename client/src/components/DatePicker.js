@@ -103,44 +103,44 @@ class DatePicker extends React.Component {
                   <h1 className="carousel-title text-white">Book an Appointment</h1>
                   <p className="carousel-subtitle">Select a date and time for your appointment</p>
                 </span>
-                    <form className="row">
-                      <div className="form-group col-md-3 fadein">
-                        <input
-                          id="Date"
-                          className="form-control"
-                          placeholder="Appointment Date"
-                          type="date"
-                          onChange={this.handleChange}
-                        />
-                      </div>
-                      <div className="form-group col-md-3 fadein">
-                        <input
-                          id="Time"
-                          className="form-control"
-                          placeholder="Time"
-                          type="time"
-                          onChange={this.handleChange}
-                        />
-                      </div>
-                      <div className="form-group col-md-3 fadein">
-                        <input
-                          id="AptDescription"
-                          className="form-control"
-                          placeholder="Add a description"
-                          type="text"
-                          onChange={this.handleChange}
-                        />
-                      </div>
-                      <div className="form-group col-md-3 fadein">
-                        <button
-                          className="btn configure-btn"
-                          type="submit"
-                          onClick={this.createAppointment}
-                        >
-                          Book an appointment
-                        </button>
-                      </div>
-                    </form>
+                <form className="row">
+                  <div className="form-group col-md-3 fadein">
+                    <input
+                      id="Date"
+                      className="form-control"
+                      placeholder="Appointment Date"
+                      type="date"
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div className="form-group col-md-3 fadein">
+                    <input
+                      id="Time"
+                      className="form-control"
+                      placeholder="Time"
+                      type="time"
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div className="form-group col-md-3 fadein">
+                    <input
+                      id="AptDescription"
+                      className="form-control"
+                      placeholder="Add a description"
+                      type="text"
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div className="form-group col-md-3 fadein">
+                    <button
+                      className="btn configure-btn"
+                      type="submit"
+                      onClick={this.createAppointment}
+                    >
+                      Book an appointment
+                    </button>
+                  </div>
+                </form>
 
               </div>
             </div>
