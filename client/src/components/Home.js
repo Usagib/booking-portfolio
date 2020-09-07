@@ -14,7 +14,7 @@ const Home = () => (
           }}
         >
           <div className="carousel-caption d-none d-md-block">
-            <h2 className="display-5 text-dark float-right ml-5">I like to develop</h2>
+            <h2 className="home-title fadein">Usagi Develops</h2>
           </div>
         </div>
         <div
@@ -27,7 +27,7 @@ const Home = () => (
           }}
         >
           <div className="carousel-caption d-none d-md-block">
-            <h2 className="display-5 text-dark float-right ml-5">I like to design</h2>
+            <h2 className="home-title fadein">Usagi Designs</h2>
           </div>
         </div>
         <div
@@ -40,7 +40,7 @@ const Home = () => (
           }}
         >
           <div className="carousel-caption d-none d-md-block">
-            <h2 className="display-5 text-dark float-right ml-5">I like to create</h2>
+            <h2 className="home-title fadein">Usagi Creates</h2>
           </div>
         </div>
       </div>

@@ -89,7 +89,7 @@ class Login extends React.Component {
       <div className="login-container">
         {this.renderRedirect()}
         <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
-          <h1 className="display-4 fadein fadein-first">Hello.</h1>
+          <h1 className="log-title fadein fadein-first">Hello.</h1>
           <form>
             <div className="form-group fadein fadein-second">
               <input
@@ -113,15 +113,15 @@ class Login extends React.Component {
             </div>
             <div className="form-group fadein fadein-fourth">
               <button
-                className="btn btn-dark btn-lg btn-block"
+                className="btn configure-btn btn-block"
                 type="submit"
                 onClick={this.handleLogin}
               >
                 Log In
               </button>
-              <small className="form-text text-black">
+              <small className=" log-small form-text text-black">
                 Not yet registered?,
-                <a href="/signup">click here</a>
+                <a className="log-small" href="/signup"> click here</a>
               </small>
             </div>
           </form>

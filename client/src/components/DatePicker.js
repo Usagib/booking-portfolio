@@ -85,50 +85,68 @@ class DatePicker extends React.Component {
 
   render() {
     return (
-      <div className="login-container">
+      <header>
         {this.renderRedirect()}
-        <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
-          <h1 className="display-4">Lets meet.</h1>
-          <form>
-            <div className="form-group fadein">
-              <input
-                id="Date"
-                className="form-control form-control-lg"
-                placeholder="Appointment Date"
-                type="date"
-                onChange={this.handleChange}
-              />
+        <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
+          <div className="carousel-inner">
+            <div
+              className="carousel-item active"
+              style={{
+                background: 'url(\'datemain.png\')',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            >
+              <div className="carousel-caption d-none d-md-block fadein fadein-first">
+                <span>
+                  <h1 className="carousel-title text-white">Book an Appointment</h1>
+                  <p className="carousel-subtitle">Select a date and time for your appointment</p>
+                </span>
+                    <form className="row">
+                      <div className="form-group col-md-3 fadein">
+                        <input
+                          id="Date"
+                          className="form-control"
+                          placeholder="Appointment Date"
+                          type="date"
+                          onChange={this.handleChange}
+                        />
+                      </div>
+                      <div className="form-group col-md-3 fadein">
+                        <input
+                          id="Time"
+                          className="form-control"
+                          placeholder="Time"
+                          type="time"
+                          onChange={this.handleChange}
+                        />
+                      </div>
+                      <div className="form-group col-md-3 fadein">
+                        <input
+                          id="AptDescription"
+                          className="form-control"
+                          placeholder="Add a description"
+                          type="text"
+                          onChange={this.handleChange}
+                        />
+                      </div>
+                      <div className="form-group col-md-3 fadein">
+                        <button
+                          className="btn configure-btn"
+                          type="submit"
+                          onClick={this.createAppointment}
+                        >
+                          Book an appointment
+                        </button>
+                      </div>
+                    </form>
+
+              </div>
             </div>
-            <div className="form-group fadein">
-              <input
-                id="Time"
-                className="form-control form-control-lg"
-                placeholder="Time"
-                type="time"
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="form-group fadein">
-              <input
-                id="AptDescription"
-                className="form-control form-control-lg"
-                placeholder="Add a description"
-                type="text"
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="form-group fadein">
-              <button
-                className="btn btn-dark btn-lg btn-block"
-                type="submit"
-                onClick={this.createAppointment}
-              >
-                Book an appointment
-              </button>
-            </div>
-          </form>
+          </div>
         </div>
-      </div>
+      </header>
     );
   }
 }

@@ -130,10 +130,10 @@ class Profile extends React.Component {
       <div className="login-container">
         {this.getServices()}
         <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
-          <h1 className="display-4">
+          <h1 className="log-title">
             Good to see you {cookies.get('name')}
           </h1>
-          <h5 className="display-5">
+          <h5 className="log-subtitle">
             {cookies.get('email')}
           </h5>
           <div />
@@ -143,7 +143,7 @@ class Profile extends React.Component {
                 <h5 className="mb-0">
                   <button
                     type="button"
-                    className="btn btn-dark"
+                    className="btn configure-btn"
                     data-toggle="collapse"
                     data-target="#collapseUserServices"
                     aria-expanded="true"
@@ -161,13 +161,6 @@ class Profile extends React.Component {
                       <p>notes: {service.description}</p>
                       <p>Max budget: ${service.max_cost}</p>
                       <p>Min budget: ${service.min_cost}</p>
-                        {/*<button
-                          type="button"
-                          onClick={event => this.bookAppointment(service.id, event)}
-                          className="btn btn-dark"
-                          >
-                          Book an appointment
-                        </button> */}
                       <button
                         type="button"
                         onClick={event => this.cancelService(service.id, event)}
@@ -186,7 +179,7 @@ class Profile extends React.Component {
                   <button
                     type="button"
                     onClick={this.getAppointments}
-                    className="btn btn-dark"
+                    className="btn configure-btn"
                     data-toggle="collapse"
                     data-target="#collapseUserAppointments"
                     aria-expanded="true"

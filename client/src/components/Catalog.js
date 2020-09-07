@@ -1,6 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { faCog, faPlayCircle, faArrowAltCircleRight, faArrowAltCircleLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowAltCircleRight, faArrowAltCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Catalog = () => {
@@ -13,7 +12,7 @@ const Catalog = () => {
             <p className="fadein fadein-second catalog-subtitle">Select your prefered service</p>
           </div>
         </div>
-        <div class="row select mt-5 fadein fadein-third">
+        <div className="row select mt-5 fadein fadein-third">
           <a className="carousel-control-prev" href="#selectCarousel" role="button" data-slide="prev">
             <div classname="carousel-control-prev-icon" aria-hidden="true">
               <button type="button" className="btn btn-carousel">
@@ -26,15 +25,15 @@ const Catalog = () => {
               <FontAwesomeIcon icon={faArrowAltCircleRight} />
             </button>
           </a>
-            <div class="col-md-12">
-              <div id="selectCarousel" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item inner-sv active">
-                    <div class="row">
+            <div className="col-md-12">
+              <div id="selectCarousel" className="carousel slide" data-ride="carousel">
+                <div className="carousel-inner">
+                  <div className="carousel-item inner-sv active">
+                    <div className="row">
                       <div className="col-md-3 mx-auto my-auto text-center">
                         <a href="/serviceselect">
                           <div className="rounded-circle service-img-wrapper">
-                            <img className="service-img img-fluid" src="/service1.png" />
+                            <img alt="svprint" className="service-img img-fluid" src="/service1.png" />
                           </div>
                         </a>
                         <h2>3d Printing</h2>
@@ -56,7 +55,7 @@ const Catalog = () => {
                       <div className="col-md-3 mx-auto my-auto text-center">
                         <a href="/serviceselect">
                           <div className="rounded-circle service-img-wrapper">
-                            <img className="service-img img-fluid" src="/service2.png" />
+                            <img alt="svFe" className="service-img img-fluid" src="/service2.png" />
                           </div>
                         </a>
                         <h2>FrontEnd Design</h2>
@@ -78,7 +77,7 @@ const Catalog = () => {
                       <div className="col-md-3 mx-auto my-auto text-center">
                         <a href="/serviceselect">
                           <div className="rounded-circle service-img-wrapper">
-                            <img className="service-img img-fluid" src="/service3.png" />
+                            <img alt="svbE" className="service-img img-fluid" src="/service3.png" />
                           </div>
                         </a>
                         <h2>BackEnd Development</h2>
@@ -104,7 +103,7 @@ const Catalog = () => {
                       <div className="col-md-3 mx-auto my-auto text-center">
                         <a href="/serviceselect">
                           <div className="rounded-circle service-img-wrapper">
-                            <img className="service-img img-fluid" src="/service4.png" />
+                            <img alt="svGd" className="service-img img-fluid" src="/service4.png" />
                           </div>
                         </a>
                         <h2>Graphic Design</h2>
@@ -126,7 +125,7 @@ const Catalog = () => {
                       <div className="col-md-3 mx-auto my-auto text-center">
                         <a href="/serviceselect">
                           <div className="rounded-circle service-img-wrapper">
-                            <img className="service-img img-fix img-fluid" src="/service5.png" />
+                            <img alt="svSp" className="service-img img-fix img-fluid" src="/service5.png" />
                           </div>
                         </a>
                         <h2>Stationery Production</h2>
@@ -148,7 +147,7 @@ const Catalog = () => {
                       <div className="col-md-3 mx-auto my-auto text-center">
                         <a href="/serviceselect">
                           <div className="rounded-circle service-img-wrapper">
-                            <img className="service-img img-fluid" src="/service6.png" />
+                            <img alt="svTs" className="service-img img-fluid" src="/service6.png" />
                           </div>
                         </a>
                         <h2>Tech Support</h2>
