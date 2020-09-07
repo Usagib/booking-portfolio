@@ -15,7 +15,7 @@ RSpec.describe 'Appointment', type: :request do
 
   describe 'GET /services/:service_id/appointments' do
     before do
-      get "/services/#{service_id}/appointments",
+      get "/api/services/#{service_id}/appointments",
           params: {},
           headers: headers
     end
@@ -32,7 +32,7 @@ RSpec.describe 'Appointment', type: :request do
 
   describe 'GET /services/:service_id/appointments/:id' do
     before do
-      get "/services/#{service_id}/appointments/#{id}",
+      get "/api/services/#{service_id}/appointments/#{id}",
           params: {},
           headers: headers
     end
@@ -71,7 +71,7 @@ RSpec.describe 'Appointment', type: :request do
     end
 
     context 'when attributes are valid' do
-      before { post "/services/#{service_id}/appointments", params: valid_attributes, headers: headers }
+      before { post "/api/services/#{service_id}/appointments", params: valid_attributes, headers: headers }
 
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
@@ -80,7 +80,7 @@ RSpec.describe 'Appointment', type: :request do
 
     context 'when attributes are invalid' do
       let(:invalid_description) { { description: '' }.to_json }
-      before { post "/services/#{service_id}/appointments", params: invalid_description, headers: headers }
+      before { post "/api/services/#{service_id}/appointments", params: invalid_description, headers: headers }
 
       it 'http status 422' do
         expect(response).to have_http_status(422)
@@ -100,7 +100,7 @@ RSpec.describe 'Appointment', type: :request do
       }.to_json
     end
 
-    before { put "/services/#{service_id}/appointments/#{id}", params: valid_attributes, headers: headers }
+    before { put "/api/services/#{service_id}/appointments/#{id}", params: valid_attributes, headers: headers }
 
     context 'when the record exists' do
       it 'updates the record' do
@@ -127,7 +127,7 @@ RSpec.describe 'Appointment', type: :request do
   end
 
   describe 'DELETE /appointments/:id' do
-    before { delete "/services/#{service_id}/appointments/#{id}", params: {}, headers: headers }
+    before { delete "/api/services/#{service_id}/appointments/#{id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

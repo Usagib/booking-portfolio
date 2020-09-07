@@ -14,7 +14,7 @@ RSpec.describe 'Services', type: :request do
 
   describe 'GET /services' do
     before do
-      get '/services',
+      get '/api/services',
           params: {},
           headers: headers
     end
@@ -31,7 +31,7 @@ RSpec.describe 'Services', type: :request do
 
   describe 'GET /services/:id' do
     before do
-      get "/services/#{service_id}",
+      get "/api/services/#{service_id}",
           params: {},
           headers: headers
     end
@@ -72,7 +72,7 @@ RSpec.describe 'Services', type: :request do
     end
 
     context 'when the request is valid' do
-      before { post '/services', params: valid_attributes, headers: headers }
+      before { post '/api/services', params: valid_attributes, headers: headers }
 
       it 'creates a service' do
         expect(json['name']).to eq(example_name)
@@ -85,7 +85,7 @@ RSpec.describe 'Services', type: :request do
 
     context 'when the request is invalid' do
       let(:no_attributes) { { name: '' }.to_json }
-      before { post '/services', params: no_attributes, headers: headers }
+      before { post '/api/services', params: no_attributes, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -102,7 +102,7 @@ RSpec.describe 'Services', type: :request do
     let(:valid_attributes) { { name: 'Updated name' }.to_json }
 
     context 'when the record exists' do
-      before { put "/services/#{service_id}", params: valid_attributes, headers: headers }
+      before { put "/api/services/#{service_id}", params: valid_attributes, headers: headers }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -115,7 +115,7 @@ RSpec.describe 'Services', type: :request do
   end
 
   describe 'DELETE /services/:id' do
-    before { delete "/services/#{service_id}", params: {}, headers: headers }
+    before { delete "/api/services/#{service_id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
