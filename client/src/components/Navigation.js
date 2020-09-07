@@ -85,7 +85,13 @@ class Navigation extends React.Component {
                 Services
               </a>
             </li>
-          </ul>
+          <li className="nav-item">
+            <a href="/catalog" className="nav-link text-dark font-italic">
+              <i className="fa fa-address-card mr-3 text-primary fa-fw" />
+              Select a service
+            </a>
+          </li>
+        </ul>
 
           <p className="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">You</p>
           <UserNavigation loggedIn={logged} />

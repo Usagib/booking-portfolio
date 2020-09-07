@@ -30,12 +30,12 @@ class Services extends React.Component {
                 backgroundPosition: 'center',
               }}
             >
-              <div className="carousel-caption d-none d-md-block">
+              <div className="carousel-caption d-none d-md-block fadein fadein-first">
                 <span>
                   <h1 className="carousel-title text-white">NEW AVAILABLE SERVICES</h1>
                 </span>
-                <button type="button" className="btn configure-btn float-center">
-                  <a href="/serviceselect">
+                <button type="button" className="fadein fadein-second btn configure-btn float-center">
+                  <a href="/catalog">
                     <FontAwesomeIcon icon={faCog} />
                       <span className="mx-2">Configure</span>
                     <FontAwesomeIcon icon={faPlayCircle} />

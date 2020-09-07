@@ -15,6 +15,7 @@ import Signup from './Signup';
 import DatePicker from './DatePicker';
 import Profile from './Profile';
 import Logout from './Logout';
+import Catalog from './Catalog';
 
 const App = props => {
   const { cookies } = props;
@@ -25,6 +26,9 @@ const App = props => {
         <Switch>
           <Route path="/services">
             <Services cookies={cookies} />
+          </Route>
+          <Route path="/catalog">
+            <Catalog cookies={cookies} />
           </Route>
           <Route path="/serviceselect">
             <ServiceSelect cookies={cookies} />

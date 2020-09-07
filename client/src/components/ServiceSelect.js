@@ -138,68 +138,83 @@ class ServiceSelect extends React.Component {
     const { background } = this.state;
     return (
       <div
-        className="login-container"
+        className="login-container container-fluid"
         style={{
           backgroundImage: `url(${background})`,
           backgroundSize: 'cover',
         }}
       >
         {this.renderRedirect()}
-        <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
-          <div />
-          <h1 className="display-4 fadein fadein-first">Select a service</h1>
-          <form className="bg-white mx-5 my-5 px-5 py-5 rounded">
-            <div className="form-group fadein fadein-second">
-              <select
-                className="form-control"
-                id="serviceName"
-                onChange={this.handleChange}
-              >
-                {servicesList.map(service => (
-                  <option
-                    key={service}
-                    value={`${service}`}
+        <div className="row h-100">
+          <div className="col-md-4 offset-8">
+            <div className="form-container d-flex align-items-right flex-column justify-content-center text-black">
+              <div />
+              <h1 className="catalog-title fadein fadein-first mb-5">Configure a Service</h1>
+              <form className="rounded">
+                <div className="form-group fadein fadein-second">
+                  <label className="catalog-subtitle" for="#Min">
+                    Service:
+                  </label>
+                  <select
+                    className="form-control"
+                    id="serviceName"
+                    onChange={this.handleChange}
                   >
-                    {service}
-                  </option>
-                ))}
-              </select>
+                    {servicesList.map(service => (
+                      <option
+                        key={service}
+                        value={`${service}`}
+                      >
+                        {service}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="form-group fadein fadein-third">
+                  <label className="catalog-subtitle" for="#Min">
+                    Your minimum budget
+                  </label>
+                  <input
+                    id="Min"
+                    className="col-md-6 form-control"
+                    placeholder="Min budget"
+                    type="number"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-group fadein fadein-third">
+                  <label className="catalog-subtitle" for="#Min">
+                    Your maximum budget
+                  </label>
+                  <input
+                    id="Max"
+                    className="col-md-6 form-control"
+                    placeholder="Max budget"
+                    type="number"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-group fadein fadein-third">
+                  <input
+                    id="Notes"
+                    className="form-control form-control-lg"
+                    placeholder="Notes"
+                    type="text"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-group fadein fadein-fourth mt-5">
+                  <button
+                    className="btn configure-btn"
+                    type="submit"
+                    onClick={this.createService}
+                  >
+                    Select service & Book Appointment
+                  </button>
+                </div>
+              </form>
             </div>
-            <div className="form-group row fadein fadein-third">
-              <input
-                id="Min"
-                className="col-md-6 form-control"
-                placeholder="Min budget"
-                type="number"
-                onChange={this.handleChange}
-              />
-              <input
-                id="Max"
-                className="col-md-6 form-control"
-                placeholder="Max budget"
-                type="number"
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="form-group fadein fadein-third">
-              <input
-                id="Notes"
-                className="form-control form-control-lg"
-                placeholder="Notes"
-                type="text"
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="form-group fadein fadein-fourth">
-              <button
-                className="btn btn-dark btn-lg btn-block"
-                type="submit"
-                onClick={this.createService}
-              >
-                Select service
-              </button>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
     );

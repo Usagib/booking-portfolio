@@ -9,8 +9,35 @@
   z-index: 99;
 }
 
+.service-img-wrapper {
+  background: #97bf0f;
+}
+
+.service-img-wrapper:hover {
+  background: #97bfaa !important;
+}
+
+.catalog-title {
+  margin-top: 10%;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #333;
+  font-size: 3rem;
+}
+
+.catalog-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
 .carousel-caption {
   height: 100%;
+}
+
+.service-img {
+  margin-left: 20%;
 }
 
 .configure-btn {
@@ -62,8 +89,6 @@ a:hover {
   transition: all 0.4s;
 }
 
-/* for toggle behavior */
-
 #sidebar.active {
   margin-left: -17rem;
 }
@@ -95,7 +120,7 @@ a:hover {
 
 body {
   background: #fff;
-  background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);
+  /*background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);*/
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -188,4 +213,42 @@ body {
   -webkit-animation-delay: 1s;
   -moz-animation-delay: 1s;
   animation-delay: 1s;
+}
+
+.select .carousel-indicators {
+	left: 0;
+	top: auto;
+    bottom: -40px;
+}
+
+.btn-carousel {
+  border-radius: 40px;
+  font-size: 2.2rem;
+  background-color: #97bf0f;
+  position: absolute;
+  left: 0;
+  width: 50%;
+}
+
+.btn-right {
+  margin-left: 50%;
+}
+
+.carousel-item {
+  height: 100vh;
+}
+
+.inner-sv {
+  height: auto !important;
+}
+
+.carousel-indicators li {
+    background: #a3a3a3;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+}
+
+.carousel-indicators .active {
+background: #707070;
 }
