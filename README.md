@@ -1,3 +1,5 @@
+### Version 1.2 updated
+
 <br />
 <p align="center">
  <a href="https://github.com/Usagib/booking-portfolio">
