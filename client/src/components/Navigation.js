@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import UserNavigation from './UserNavigation';
 
 class Navigation extends React.Component {
@@ -9,7 +11,7 @@ class Navigation extends React.Component {
     this.toggleSidenav = this.toggleSidenav.bind(this);
     this.refreshNav = this.refreshNav.bind(this);
     this.state = {
-      toggleSidebar: '',
+      toggleSidebar: 'active',
     };
   }
 
@@ -49,6 +51,10 @@ class Navigation extends React.Component {
           }}
         >
           <img src="navphoto.png" alt="..." width="80" className="mr-3 rounded-circle img-thumbnail shadow-sm" />
+          <span className="menu-indicator">
+            <FontAwesomeIcon icon={faArrowAltCircleLeft} />
+            Menu
+          </span>
         </button>
         <div className={`vertical-nav bg-white toggleSidebar ${toggleSidebar}`} id="sidebar">
           <div className="py-4 px-3 mb-4 bg-light">

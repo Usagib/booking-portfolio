@@ -99,6 +99,8 @@ class Profile extends React.Component {
       Authorization: authToken,
     };
     const url = `https://usagi-booking-api.herokuapp.com/api/services/${sId}/`;
+    console.log(url);
+    console.log(authToken);
     axios.delete(url, {
       headers,
     }).then(() => {
@@ -128,106 +130,107 @@ class Profile extends React.Component {
     return (
       <div className="login-container">
         {this.getServices()}
-        <div className="form-container d-flex align-items-center flex-column justify-content-center h-100 text-black">
-          <h1 className="log-title">
-            Good to see you
-            {' '}
-            {cookies.get('name')}
-          </h1>
-          <h5 className="log-subtitle">
-            {cookies.get('email')}
-          </h5>
-          <div />
-          <div id="accordion" className="text-center">
-            <div className="card">
-              <div className="card-header" id="userServices">
-                <h5 className="mb-0">
-                  <button
-                    type="button"
-                    className="btn configure-btn"
-                    data-toggle="collapse"
-                    data-target="#collapseUserServices"
-                    aria-expanded="true"
-                    aria-controls="collapseUserServices"
-                  >
-                    Your Services
-                  </button>
-                </h5>
-              </div>
-              <div id="collapseUserServices" className="collapse" aria-labelledby="userServices" data-parent="#accordion">
-                <div className="row">
-                  {servicesList.map(service => (
-                    <div className="col-md-4 mb-5 service-card" key={service.id}>
-                      <p>{service.name}</p>
-                      <p>
-                        notes:
-                        {service.description}
-                      </p>
-                      <p>
-                        Max budget: $
-                        {service.max_cost}
-                      </p>
-                      <p>
-                        Min budget: $
-                        {service.min_cost}
-                      </p>
+        <div className="container d-flex align-items-center flex-column justify-content-center h-100 text-black">
+          <div className="row">
+            <div className="col-md-8 offset-4">
+              <h1 className="log-title">
+                Good to see you
+                {' '}
+                {cookies.get('name')}
+              </h1>
+              <h5 className="profile-title">
+                {cookies.get('email')}
+              </h5>
+              <div />
+              <div id="accordion" className="text-center">
+                <div className="card">
+                  <div className="card-header" id="userServices">
+                    <h5 className="mb-0">
                       <button
                         type="button"
-                        onClick={event => this.cancelService(service.id, event)}
-                        className="btn btn-danger"
+                        className="btn configure-btn"
+                        data-toggle="collapse"
+                        data-target="#collapseUserServices"
+                        aria-expanded="true"
+                        aria-controls="collapseUserServices"
                       >
-                        Cancel
+                        Your Services
                       </button>
+                    </h5>
+                  </div>
+                  <div id="collapseUserServices" className="collapse" aria-labelledby="userServices" data-parent="#accordion">
+                    <div className="row">
+                      {servicesList.map(service => (
+                        <div className="col-md-4 mb-5 service-card" key={service.id}>
+                          <span className="profile-title">{service.name}</span>
+                          <p className="profile-subtitle">
+                            {service.description}
+                          </p>
+                          <p className="profile-text">
+                            Budget: from $
+                            {service.min_cost}
+                            - $
+                            {service.max_cost}
+                          </p>
+                          <button
+                            type="button"
+                            onClick={event => this.cancelService(service.id, event)}
+                            className="btn cancel-btn"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="card">
-              <div className="card-header" id="userAppointments">
-                <h5 className="mb-0">
-                  <button
-                    type="button"
-                    onClick={this.getAppointments}
-                    className="btn configure-btn"
-                    data-toggle="collapse"
-                    data-target="#collapseUserAppointments"
-                    aria-expanded="true"
-                    aria-controls="collapseUserAppointments"
-                  >
-                    Your Appointments
-                  </button>
-                </h5>
-              </div>
-              <div id="collapseUserAppointments" className="collapse" aria-labelledby="userAppointments" data-parent="#accordion">
-                <div className="row">
-                  {appointmentsList.map(appointment => (
-                    <div className="col-md-3 mb-5 appointment-card" key={appointment.id}>
-                      <p>
-                        For service #
-                        {appointment.service_id}
-                      </p>
-                      <p>
-                        {appointment.date}
-                        {' '}
-                        at
-                        {' '}
-                        {appointment.time}
-                        {' '}
-                        hrs
-                      </p>
-                      <p>{appointment.description}</p>
+                <div className="card">
+                  <div className="card-header" id="userAppointments">
+                    <h5 className="mb-0">
                       <button
                         type="button"
-                        onClick={
-                          e => this.cancelAppointment(appointment.id, appointment.service_id, e)
-                        }
-                        className="btn btn-danger"
+                        onClick={this.getAppointments}
+                        className="btn configure-btn"
+                        data-toggle="collapse"
+                        data-target="#collapseUserAppointments"
+                        aria-expanded="true"
+                        aria-controls="collapseUserAppointments"
                       >
-                        Cancel appointment
+                        Your Appointments
                       </button>
+                    </h5>
+                  </div>
+                  <div id="collapseUserAppointments" className="collapse" aria-labelledby="userAppointments" data-parent="#accordion">
+                    <div className="row">
+                      {appointmentsList.map(appointment => (
+                        <div className="col-md-4 mb-5 service-card" key={appointment.id}>
+                          <span className="profile-title">
+                            For service #
+                            {appointment.service_id}
+                          </span>
+                          <p className="profile-subtitle">
+                            {appointment.date}
+                            {' '}
+                            at
+                            {' '}
+                            {appointment.time}
+                            {' '}
+                            hrs
+                          </p>
+                          <p className="profile-text">{appointment.description}</p>
+                          <button
+                            type="button"
+                            onClick={
+                              e => this.cancelAppointment(appointment.id, appointment.service_id, e)
+                            }
+                            className="btn cancel-btn"
+                          >
+                            Cancel appointment
+                          </button>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
                 </div>
               </div>
             </div>

@@ -47,6 +47,13 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.cancel-btn {
+  border-radius: 50px;
+  font-size: 0.8rem;
+  background-color: #ba262b;
+  font-family: 'Poppins', sans-serif;
+}
+
 .carousel-title {
   margin-top: 45%;
   margin-bottom: 5%;
@@ -61,6 +68,16 @@
   font-size: 5rem;
   letter-spacing: 10px;
   background-color: black;
+}
+
+.menu-indicator {
+  font-family: 'itcBauhausBold', sans-serif;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: white;
+  background-color: black;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .nav-link {
@@ -109,6 +126,23 @@ a:hover {
   width: calc(100% - 17rem);
   margin-left: 17rem;
   transition: all 0.4s;
+}
+
+.profile-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.profile-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+}
+
+.profile-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.7rem;
+  font-weight: lighter;
 }
 
 #sidebar.active {
@@ -171,10 +205,6 @@ body {
 }
 
 .service-card {
-  min-width: 200px;
-}
-
-.appointment-card {
   min-width: 200px;
 }
 
