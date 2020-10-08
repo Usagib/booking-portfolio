@@ -1,4 +1,8 @@
 ### Version 1.2 updated
+### Upcoming features
+ - Facebook / Google omniauth
+ - User dashboard new features
+ - Push notifications
 
 <br />
 <p align="center">
