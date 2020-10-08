@@ -150,8 +150,9 @@ Additional packages used
 
 ## Contact
 
-Eduardo Bonilla Github [https://github.com/UsagiB](https://github.com/UsagiB)
-Eduardo Bonilla Portfolio [Usagib.github.io](http://usagib.github.io)
+* Eduardo Bonilla Cáceres - eduardobonillac@gmail.com
+* [My Portfolio](https://usagib.surge.sh)
+* [My Twitter](https://twitter.com/UsagiBonilla)
 
 
 ## Show your support
