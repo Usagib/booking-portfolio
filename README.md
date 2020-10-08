@@ -7,7 +7,7 @@
 
  </a>
 
- <h3 align="center">Booking App bootstraped with React + Redux with RESTful API developed in Ruby on Rails</h3>
+ <h3 align="center">Booking App bootstrapped with React + Redux with RESTful API developed in Ruby on Rails</h3>
 
  <p align="center">
   Portfolio application with user dashboard for requesting services and create appointments
@@ -38,7 +38,7 @@ Booking portfolio got a radical makeover: check out the new smooth UX
 
 ## About The Project
 
-RESTful API developed using Ruby on Rails, Json Web Token and bcrypt to ensure log security and deployed to heroku, Frontend built with React / Redux and bootstrap.
+RESTful API developed using Ruby on Rails, Json Web Token, bcrypt to ensure log security and deployed to Heroku, Frontend built with React + Redux and bootstrap.
 
 ## Live Demo
 
@@ -71,7 +71,7 @@ Frontend
 * User can request new services
 * User can book appointments for their services
 * User can navigate their data trough the profile dashboard
-* Straightfoward UI
+* Straightforward UI
 
 ## API Endpopints and Validations
 - URL: https://usagi-booking-api.herokuapp.com/
